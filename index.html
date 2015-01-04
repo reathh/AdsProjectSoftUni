@@ -8,13 +8,20 @@
     <link rel="stylesheet" href="css/app.css" />
 </head>
 <body ng-app="adsApp" ng-controller="MainController" ng-cloak>
-<nav class="text-center">
+<div id="top-panel" class="text-center">
     <h2>Ads - {{currentPageString}}</h2>
-</nav>
+    <span id="user-info"></span>
+</div>
 <div id="container" >
         <div class="col-md-3" id="left-column">
-            <div id="navigation" ng-controller="NavigationController">
-
+            <div id="navigation" class="text-center" ng-controller="NavigationController">
+                <div class="green-box">
+                    <h3>Navigation</h3>
+                    <hr>
+                    <ul ng-repeat="navItem in navItems" id="navigation-items">
+                        <div navigation-item-directive></div>
+                    </ul>
+                </div>
             </div>
             <div id="please-login-panel" class="text-center" ng-show="showPleaseLoginPanel" ng-include="pleaseLoginPanel">
 
@@ -36,8 +43,7 @@
 <script src="js/controllers/MainController.js"></script>
 <script src="js/controllers/NavigationController.js"></script>
 <script src="js/controllers/MainContentController.js"></script>
-
-
+<script src="js/directives/navigationItemDirective.js"></script>
 
 </body>
 </html>

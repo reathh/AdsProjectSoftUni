@@ -1,22 +1,45 @@
-nav {
+#top-panel {
     background-color: greenyellow;
     padding: 10px;
     border: 1px solid black
 }
-nav h2 {
+#top-panel h2 {
     margin: 0;
 }
 .green-box {
     padding: 20px;
+    border: 1px solid black;
     border-radius: 10px;
     background-color: greenyellow;
+    margin-bottom: 10px;
+}
+.green-box hr {
+    border-color: black;
 }
 
-#please-login {
-    margin-bottom: 5px;
-    width: 150px;
-    border: 1px solid black;
+#navigation {
+    margin-top: 10px;
 }
-#please-login div {
+#navigation-items {
+    list-style-type: none;
+    padding: 0;
+    font-size: 1.3em;
+}
+#navigation-items .active {
+    background-color: #FFB732;
+    padding: 5px;
+    border-radius: 30px;
+}
+
+#please-login-panel {
     margin-bottom: 5px;
+}
+#please-login-panel div {
+    margin-bottom: 10px;
+}
+#please-login-panel div:last-child {
+    margin-bottom: 0;
+}
+#please-login-panel button {
+    width: 85%;
 }
