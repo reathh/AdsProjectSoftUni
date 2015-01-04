@@ -12,19 +12,17 @@
     <h2>Ads - {{currentPageString}}</h2>
 </nav>
 <div id="container" >
-    <div class="row">
         <div class="col-md-3" id="left-column">
             <div id="navigation" ng-controller="NavigationController">
 
             </div>
-            <div id="please-login-panel" ng-show="showPleaseLoginPanel">
+            <div id="please-login-panel" class="text-center" ng-show="showPleaseLoginPanel" ng-include="pleaseLoginPanel">
 
             </div>
         </div>
         <div class="col-md-9" id="main-content" ng-controller="MainContentController">
 
         </div>
-    </div>
 </div>
 
 <script src="node_modules/jquery/dist/jquery.js"></script>

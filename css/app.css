@@ -6,3 +6,17 @@ nav {
 nav h2 {
     margin: 0;
 }
+.green-box {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: greenyellow;
+}
+
+#please-login {
+    margin-bottom: 5px;
+    width: 150px;
+    border: 1px solid black;
+}
+#please-login div {
+    margin-bottom: 5px;
+}
