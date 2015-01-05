@@ -25,15 +25,20 @@
 #navigation, #main-content {
     margin-top: 10px;
 }
-#navigation-items {
+#navigation-items, #category-items, #town-items {
     list-style-type: none;
     padding: 0;
     font-size: 1.3em;
 }
-#navigation-items .active {
+#navigation-items .active, #category-items .active, #town-items .active {
     background-color: #FFB732;
     padding: 5px;
     border-radius: 30px;
+}
+
+.category-item:hover, .town-item:hover {
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 #please-login-panel {
@@ -56,4 +61,16 @@
 }
 .ad-description {
     padding: 10px;
+}
+.owner-info>div {
+    margin-top: 5px;
+}
+.ad-description, .ad-name, .ad-email, .ad-phone {
+    text-align: center;
+}
+.ad-name, .ad-email, .ad-phone {
+    word-wrap: break-word;
+    display: inline-block;
+    padding: 5px 0;
+    width: 40%;
 }

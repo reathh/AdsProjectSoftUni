@@ -1,0 +1,1 @@
+<li ng-repeat="categoryItem in categories" ng-class="{'category-item': true, 'active': isCategoryItemSelected(categoryItem.id)}" ng-click="changeSelectedCategory(categoryItem.id)"><span>{{categoryItem.name}}</span></li>

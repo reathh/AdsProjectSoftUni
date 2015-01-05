@@ -1,23 +1,57 @@
 <div ng-controller="viewAdsAsUserController">
-    <div ng-repeat="ad in ads.ads">
-        <div class="green-box col-md-9">
-            <div class="row">
-                <span class="pull-right ad-date col-md-2">{{ad.date | date: 'd-MMM-yyyy'}}</span>
-                <h4 class="ad-title col-md-10">{{ad.title}}</h4>
-                <div class="clearfix"></div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="white-box text-center">
-                        <img src="" alt="Ad Picture" ng-src="{{ad.imageDataUrl}}" class="ad-picture"/>
+    <div class="col-md-9">
+        <div ng-repeat="ad in ads.ads">
+            <div class="green-box">
+                <div class="row">
+                    <span class="pull-right ad-date col-md-2">{{ad.date | date: 'd-MMM-yyyy'}}</span>
+                    <h4 class="ad-title col-md-10">{{ad.title}}</h4>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="white-box text-center">
+                            <img src="" alt="Ad Picture" ng-src="{{ad.imageDataUrl}}" class="ad-picture"/>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="white-box ad-description">
+                            {{ad.text}}
+                        </div>
+                        <div class="text-right owner-info">
+                            <div>
+                            <span>Name</span>
+                            <div class="white-box ad-name">{{ad.ownerName}}</div>
+                            </div>
+                            <div>
+                                <span>Email</span>
+                                <div class="white-box ad-email">{{ad.ownerEmail}}</div>
+                            </div>
+                            <div>
+                                <span>Tel.</span>
+                                <div class="white-box ad-phone">{{ad.ownerPhone}}</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <div class="white-box ad-description">
-                        {{ad.text}}
-                    </div>
-                </div>
             </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="green-box text-center">
+            <h3>Navigation</h3>
+            <hr>
+            <ul id="category-items">
+                <li ng-class="{'category-item': true, 'active': isCategoryItemSelected(0)}"><span ng-click="changeSelectedCategory(0)">All</span></li>
+                <li category-item-directive></li>
+            </ul>
+        </div>
+        <div class="green-box text-center">
+            <h3>Towns</h3>
+            <hr>
+            <ul id="town-items">
+                <li ng-class="{'town-item': true, 'active': isTownItemSelected(0)}"><span ng-click="changeSelectedTown(0)">All</span></li>
+                <li town-item-directive></li>
+            </ul>
         </div>
     </div>
 </div>

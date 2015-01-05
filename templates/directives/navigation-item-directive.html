@@ -1,1 +1,1 @@
-<li class="navigation-item {{navItem.active}}"><a href="{{navItem.url}}">{{navItem.text}}</a></li>
+<li ng-class="{'navigation-item': true, 'active': isNavigationItemSelected(navItem)}"><a href="{{navItem.url}}" ng-click="changeSelectedNavigationItem(navItem)">{{navItem.text}}</a></li>
