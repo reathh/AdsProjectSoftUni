@@ -1,0 +1,3 @@
+<div class="paging-buttons">
+    <button ng-click="changeSelectedPageNumber($index+1)" ng-class="{'btn': true, 'btn-mini':true, 'btn-success':true, 'page-button':true, 'active': isPageNumberSelected($index+1)}" ng-repeat="repeater in getArrayFromNElements(ads.numPages) track by $index">{{$index+1}}</button>
+</div>
