@@ -1,0 +1,23 @@
+<div ng-controller="viewAdsAsUserController">
+    <div ng-repeat="ad in ads.ads">
+        <div class="green-box col-md-9">
+            <div class="row">
+                <span class="pull-right ad-date col-md-2">{{ad.date | date: 'd-MMM-yyyy'}}</span>
+                <h4 class="ad-title col-md-10">{{ad.title}}</h4>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="white-box text-center">
+                        <img src="" alt="Ad Picture" ng-src="{{ad.imageDataUrl}}" class="ad-picture"/>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="white-box ad-description">
+                        {{ad.text}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

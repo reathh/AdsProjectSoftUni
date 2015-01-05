@@ -27,8 +27,7 @@
 
             </div>
         </div>
-        <div class="col-md-9" id="main-content" ng-controller="MainContentController">
-
+        <div class="col-md-9" id="main-content" ng-view>
         </div>
 </div>
 
@@ -40,10 +39,15 @@
 <script src="node_modules/angular-route/angular-route.js"></script>
 
 <script src="js/app.js"></script>
+
 <script src="js/controllers/MainController.js"></script>
 <script src="js/controllers/NavigationController.js"></script>
-<script src="js/controllers/MainContentController.js"></script>
+<script src="js/controllers/viewAdsAsUserController.js"></script>
+
 <script src="js/directives/navigationItemDirective.js"></script>
+
+<script src="js/services/userDataService.js"></script>
+<script src="js/services/adsDataService.js"></script>
 
 </body>
 </html>

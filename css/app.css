@@ -17,7 +17,12 @@
     border-color: black;
 }
 
-#navigation {
+.white-box {
+    background-color: rgba(255,255,255, 0.5);
+    border: 1px dotted limegreen;
+}
+
+#navigation, #main-content {
     margin-top: 10px;
 }
 #navigation-items {
@@ -42,4 +47,13 @@
 }
 #please-login-panel button {
     width: 85%;
+}
+
+.ad-picture {
+    width: 100px;
+    height: 120px;
+    margin: 20px 0;
+}
+.ad-description {
+    padding: 10px;
 }
