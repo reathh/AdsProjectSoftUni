@@ -83,3 +83,6 @@
 .paging-buttons button:last-child {
     margin-right: 0;
 }
+#login-form button {
+    margin-top: 10px;
+}

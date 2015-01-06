@@ -1,26 +1,24 @@
-adsApp.controller('NavigationController', function NavigationController($scope) {
+adsApp.controller('NavigationController', function NavigationController($scope, $location) {
     $scope.changeSelectedNavigationItem = changeSelectedNavigationItem;
     $scope.isNavigationItemSelected = isNavigationItemSelected;
     $scope.navItems = [
         {
-            id: 1,
             text: "Home",
             url: "#/view/ads",
             active: "active"
         },
         {
-            id: 2,
-            text: "Home",
-            url: "#/view/ads",
-            active: ""
-        },
-        {
-            id: 3,
-            text: "Home",
-            url: "#/view/ads",
+            text: "Login",
+            url: "#/login",
             active: ""
         }
     ];
+
+    if($location.url() == '/view/ads') {
+        $scope.selectedNavigationItem = $scope.navItems[0];
+    } else if ($location.url() == '/login') {
+        $scope.selectedNavigationItem = $scope.navItems[1];
+    }
 
     function changeSelectedNavigationItem (navItem) {
         $scope.selectedNavigationItem = navItem;

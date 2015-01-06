@@ -1,0 +1,16 @@
+<div ng-controller="loginController">
+    <div class="green-box col-md-6 col-md-offset-3 text-center" id="login-form">
+        <div id="login-form-noty-area"></div>
+        <h3>Login</h3>
+        <hr>
+        <div>
+            <label for="username">Username:</label><input type="text" class="form-control text-center" ng-model="username" id="username">
+        </div>
+        <div>
+            <label for="password">Password:</label><input type="text" class="form-control text-center" ng-model="password" id="password">
+        </div>
+        <div>
+            <button class="btn btn-default" ng-click="login(username, password)">Login</button>
+        </div>
+    </div>
+</div>
