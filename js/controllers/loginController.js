@@ -3,7 +3,6 @@ adsApp.controller('loginController', function ($scope, userDataService) {
     function login(username,password) {
         userDataService.login(username, password).then(function (data) {
             notyTopCenter('success', 'You successfully logged in!', 3);
-            console.log(userDataService.getCurrentUser());
         }, function (err) {
             notyInCustomContainer('#login-form-noty-area', 'topCenter', 'error', err.data.error_description, 2)
         });
