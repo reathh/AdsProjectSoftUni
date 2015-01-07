@@ -9,7 +9,7 @@ adsApp.controller('addNewAdController', function ($scope, $rootScope, $location,
         $scope.categories = adsDataService.getAllCategories();
         $scope.towns = adsDataService.getAllTowns();
 
-        $scope.fileSelected = function(fileInputField) {
+        $scope.fileSelected = function(fileInputField) { //TODO: Try to use ng-model for visualizing. There are directives in the internet
             delete $scope.adData.imageDataUrl;
             var file = fileInputField.files[0];
             if (file.type.match(/image\/.*/)) {
