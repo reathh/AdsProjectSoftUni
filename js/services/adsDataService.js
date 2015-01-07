@@ -1,4 +1,4 @@
-adsApp.factory('adsDataService', function adsDataService($resource) {
+adsApp.factory('adsDataService', function adsDataService($resource, $q) {
 
     function getAllAds(categoryId, townId, selectedPageNumber) {
         var pageSize = '?PageSize=5';
@@ -19,9 +19,43 @@ adsApp.factory('adsDataService', function adsDataService($resource) {
         var resource = $resource('http://softuni-ads.azurewebsites.net/api/Towns');
         return resource.query();
     }
+
+    function createNewAd(adData, userData) {
+        var defer = $q.defer();
+        var ad = {
+            'title': adData.title,
+            'text': adData.text,
+            'categoryId': adData.categoryId,
+            'townId': adData.townId,
+            'imageDataUrl': adData.imageDataUrl
+        };
+
+        //var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/ads');
+        //resource.save(ad, function (data) {
+        //    defer.resolve();
+        //}, function (err) {
+        //    defer.reject();
+        //});
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/ads', {}, {
+            createAd: {
+                method:'POST',
+                url: 'http://softuni-ads.azurewebsites.net/api/user/ads',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+
+        resource.createAd(ad, function (data) {
+                defer.resolve();
+            }, function (err) {
+                defer.reject();
+            });
+
+        return defer.promise;
+    }
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
-        getAllTowns: getAllTowns
+        getAllTowns: getAllTowns,
+        createNewAd: createNewAd
     }
 });

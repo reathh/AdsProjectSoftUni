@@ -90,3 +90,8 @@
 #login-form button {
     margin-top: 10px;
 }
+#preview-image {
+    width: 50%;
+    height: 55%;
+    padding: 10px;
+}
