@@ -1,6 +1,5 @@
 adsApp.factory('userDataService', function userDataService($resource, $q) {
     var changeOfUserWatch = $q.defer();
-    var user = {};
 
     function isUserLoggedIn() {
         return localStorage.getItem('user') != null;
@@ -13,9 +12,42 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
     function login(username,password) {
         var defer = $q.defer();
 
-        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/login');
-        resource.save({'username': username, 'password': password}, function (data) {
+        var userFromInputData = {
+            'username': username,
+            'password': password
+        };
 
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/login');
+        resource.save(userFromInputData, function (data) {
+            var user = {};
+            user['access_token'] = data['token_type'] + ' ' + data['access_token'];
+            user['username'] = data['username'];
+            setCurrentUser(JSON.stringify(user));
+
+            defer.resolve(data);
+        }, function (err) {
+            defer.reject(err);
+        });
+        return defer.promise;
+    }
+
+    function register(username,password, confirmPassword, name, email, phone, townId) {
+        var defer = $q.defer();
+
+        var userFromInputData = {
+            'username': username,
+            'password': password,
+            'confirmPassword': confirmPassword,
+            'name': name,
+            'email': email,
+            'phone': phone,
+            townId: townId
+        };
+
+
+            var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/register');
+        resource.save(userFromInputData, function (data) {
+            var user = {};
             user['access_token'] = data['token_type'] + ' ' + data['access_token'];
             user['username'] = data['username'];
             setCurrentUser(JSON.stringify(user));
@@ -31,20 +63,26 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         return changeOfUserWatch.promise;
     }
 
+    function getCurrentUser() {
+        return JSON.parse(localStorage.getItem('user'));
+    }
+
     function setCurrentUser(user) {
         localStorage.setItem('user', user);
-        changeOfUserWatch.notify(localStorage.getItem('user'));
+        changeOfUserWatch.notify(JSON.parse(localStorage.getItem('user')));
     }
 
     function logout() {
         localStorage.removeItem('user');
-        changeOfUserWatch.notify(localStorage.getItem('user'));
+        changeOfUserWatch.notify(JSON.parse(localStorage.getItem('user')));
     }
     return {
         isUserLoggedIn: isUserLoggedIn,
         isUserAdmin: isUserAdmin,
         login: login,
+        register: register,
         logout: logout,
-        currentUserWatch: currentUserWatch
+        currentUserWatch: currentUserWatch,
+        getCurrentUser: getCurrentUser
      }
 });

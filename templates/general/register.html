@@ -1,0 +1,22 @@
+<div ng-controller="registerController">
+    <div class="green-box text-center col-md-8 col-md-offset-2">
+        <div id="register-form-noty-area"></div>
+        <h3>Register</h3>
+        <hr>
+        <form name="registerForm">
+            <label for="username">Username:</label> <input type="text" class="form-control text-center" ng-model="username" id="username" required="required"/>
+            <label for="password">Password:</label> <input type="password" class="form-control text-center" ng-model="password" id="password" required="required"/>
+            <label for="confirmPassword">Confirm Password:</label> <input type="password" class="form-control text-center" ng-model="confirmPassword" id="confirmPassword" required="required"/>
+            <label for="name">Name:</label> <input type="text" class="form-control text-center" ng-model="name" id="name" required="required"/>
+            <label for="email">Email:</label> <input type="text" class="form-control text-center" ng-model="email" id="email" required="required"/>
+            <label for="phone">Phone:</label> <input type="text" class="form-control text-center" ng-model="phone" id="phone"/>
+            <label for="town-select">Town:</label>
+            <select name="town" id="town-select" ng-model="townId">
+                <option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+            </select>
+            <div>
+                <button class="btn btn-default" ng-disabled="registerForm.$invalid" ng-click="register(username, password, confirmPassword, name, email, phone, townId)">Register</button>
+            </div>
+        </form>
+    </div>
+</div>

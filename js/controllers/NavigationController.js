@@ -1,23 +1,59 @@
-adsApp.controller('NavigationController', function NavigationController($scope, $location) {
+adsApp.controller('NavigationController', function NavigationController($scope, $location, userDataService) {
     $scope.changeSelectedNavigationItem = changeSelectedNavigationItem;
     $scope.isNavigationItemSelected = isNavigationItemSelected;
-    $scope.navItems = [
-        {
-            text: "Home",
-            url: "#/view/ads",
-            active: "active"
-        },
-        {
-            text: "Login",
-            url: "#/login",
-            active: ""
-        }
-    ];
+    $scope.navItems = configureNavigationItems(userDataService.isUserLoggedIn());
 
-    if($location.url() == '/view/ads') {
-        $scope.selectedNavigationItem = $scope.navItems[0];
-    } else if ($location.url() == '/login') {
-        $scope.selectedNavigationItem = $scope.navItems[1];
+    $scope.$on('$locationChangeStart', function() {
+        if ($location.url() == '/view/ads') {
+            changeSelectedNavigationItem($scope.navItems[0]);
+        } else if ($location.url() == '/login') {
+            $scope.selectedNavigationItem = $scope.navItems[1];
+        } else if ($location.url() == '/register') {
+            $scope.selectedNavigationItem = $scope.navItems[2];
+        }
+    });
+
+    userDataService.currentUserWatch().then(null, null, function (user) {
+         $scope.navItems = configureNavigationItems(userDataService.isUserLoggedIn());
+    });
+
+    function configureNavigationItems(isUserLoggedIn) {
+        if (isUserLoggedIn) {
+           return [
+                {
+                    text: "Home",
+                    url: "#/view/ads"
+                },
+                {
+                    text: "My Ads",
+                    url: "#/view/user/ads"
+                },
+                {
+                    text: "Publish New Ad",
+                    url: "#/add/ad"
+                },
+                {
+                    text: "Edit Profile",
+                    url: "#/edit/profile"
+                }
+            ];
+        } else {
+            return [
+                {
+                    text: "Home",
+                    url: "#/view/ads"
+                },
+                {
+                    text: "Login",
+                    url: "#/login"
+                },
+
+                {
+                    text: "Register",
+                    url: "#/register"
+                }
+            ];
+        }
     }
 
     function changeSelectedNavigationItem (navItem) {

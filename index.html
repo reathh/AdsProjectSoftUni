@@ -10,7 +10,7 @@
 <body ng-app="adsApp" ng-controller="MainController" ng-cloak>
 <div id="top-panel" class="text-center">
     <h2>Ads - {{currentPageString}}</h2>
-    <span id="user-info"></span>
+    <span id="user-info" ng-show="showUserInfo"><a href="#/view/ads">{{currentUserUsername}}</a> - <a href="#/view/ads" class="btn btn-sm" ng-click="logout()">Logout</a></span>
 </div>
 <div id="container" >
         <div class="col-md-3" id="left-column">
@@ -44,6 +44,8 @@
 <script src="js/controllers/NavigationController.js"></script>
 <script src="js/controllers/viewAdsAsUserController.js"></script>
 <script src="js/controllers/loginController.js"></script>
+<script src="js/controllers/registerController.js"></script>
+
 
 <script src="js/directives/navigationItemDirective.js"></script>
 <script src="js/directives/adItemDirective.js"></script>

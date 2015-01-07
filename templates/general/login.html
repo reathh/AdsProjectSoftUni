@@ -3,14 +3,16 @@
         <div id="login-form-noty-area"></div>
         <h3>Login</h3>
         <hr>
-        <div>
-            <label for="username">Username:</label><input type="text" class="form-control text-center" ng-model="username" id="username">
-        </div>
-        <div>
-            <label for="password">Password:</label><input type="password" class="form-control text-center" ng-model="password" id="password">
-        </div>
-        <div>
-            <button class="btn btn-default" ng-click="login(username, password)">Login</button>
-        </div>
+        <form name="loginForm">
+            <div>
+                <label for="username">Username:</label><input type="text" class="form-control text-center" ng-model="username" id="username" required="required">
+            </div>
+            <div>
+                <label for="password">Password:</label><input type="password" class="form-control text-center" ng-model="password" id="password" required="required">
+            </div>
+            <div>
+                <button class="btn btn-default" ng-disabled="loginForm.$invalid"ng-click="login(username, password)">Login</button>
+            </div>
+        </form>
     </div>
 </div>
