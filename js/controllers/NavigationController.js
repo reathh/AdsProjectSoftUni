@@ -4,16 +4,23 @@ adsApp.controller('NavigationController', function NavigationController($scope, 
     $scope.navItems = configureNavigationItems(userDataService.isUserLoggedIn());
 
     $scope.$on('$locationChangeStart', function() {
-        if ($location.url() == '/view/ads') {
-            changeSelectedNavigationItem($scope.navItems[0]);
-        } else if ($location.url() == '/login') {
-            $scope.selectedNavigationItem = $scope.navItems[1];
-        } else if ($location.url() == '/register') {
-            $scope.selectedNavigationItem = $scope.navItems[2];
-        } else if ($location.url() == '/add/ad') {
-            $scope.selectedNavigationItem = $scope.navItems[2];
-        } else if ($location.url() == '/view/user/ads') {
-            $scope.selectedNavigationItem = $scope.navItems[1];
+        var location = $location.path();
+        switch (location) {
+            case '/view/ads':
+                changeSelectedNavigationItem($scope.navItems[0]);
+                break;
+            case '/login':
+                changeSelectedNavigationItem($scope.navItems[1]);
+                break;
+            case '/register':
+                changeSelectedNavigationItem($scope.navItems[2]);
+                break;
+            case '/add/ad':
+                changeSelectedNavigationItem($scope.navItems[2]);
+                break;
+            case '/view/user/ads':
+                changeSelectedNavigationItem($scope.navItems[1]);
+                break;
         }
     });
 
