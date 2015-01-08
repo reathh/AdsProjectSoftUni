@@ -46,13 +46,13 @@ adsApp.controller('ViewUserAdsController', function ($scope, $location, $timeout
                 //adsDataService.getAllUserAds(newValue, $scope.selectedPageNumber, userDataService.getCurrentUser()).$promise.then(function (data) {
                 //    $scope.ads = data;
                 //    console.log($scope.ads);
+                //    $scope.dirty = true;
                 //});
 
             $scope.ads = adsDataService.getAllUserAds(newValue, $scope.selectedPageNumber, userDataService.getCurrentUser());
 
-
         }
-    });
+    }, true);
 
 
     function changeSelectedStatusOption(newStatusOptionId) {
