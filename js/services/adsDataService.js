@@ -12,6 +12,18 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         return resource.get();
     }
 
+    function getAd(adId, userData) {
+        var url = 'http://softuni-ads.azurewebsites.net/api/user/ads/' + adId;
+        var resource = $resource(url, {}, {
+            get: {
+                method:'GET',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+
+        return resource.get();
+    }
+
     function getAllCategories() {
         var resource = $resource('http://softuni-ads.azurewebsites.net/api/Categories');
         return resource.query();
@@ -103,6 +115,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         getAllUserAds: getAllUserAds,
         publishAdAgain: publishAdAgain,
         deactivateAd: deactivateAd,
-        deleteAd: deleteAd
+        deleteAd: deleteAd,
+        getAd: getAd
     }
 });

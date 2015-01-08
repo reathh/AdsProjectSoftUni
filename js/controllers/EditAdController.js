@@ -3,6 +3,8 @@ adsApp.controller('EditAdController', function ($scope, $routeParams, adsDataSer
         $location.url('/login');
         notyTopCenter('alert', 'Please login first to view this page', 2);
     }
-    console.log($routeParams.id);
-    //$scope.ad = adsDataService.getAd($routeParams.id)
+
+    $scope.ad = adsDataService.getAd($routeParams.id, userDataService.getCurrentUser());
+    $scope.categories = adsDataService.getAllCategories();
+    $scope.towns = adsDataService.getAllTowns();
 });
