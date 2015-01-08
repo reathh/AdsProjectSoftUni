@@ -27,7 +27,7 @@ adsApp.controller('addNewAdController', function ($scope, $rootScope, $location,
         $scope.publishAd = function(adData) {
             adsDataService.createNewAd(adData, userDataService.getCurrentUser()).then(function () {
                     notyTopCenter('success', "Advertisement submitted for approval. Once approved, it will be published.", 2);
-                    $location.url("/user/ads");
+                    $location.url("/view/user/ads");
                 },
                 function (err) {
                     notyInCustomContainer('#add-new-ad-noty-area', 'topCenter', 'error', 'Publish ad failed', 2);
