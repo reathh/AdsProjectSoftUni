@@ -29,12 +29,12 @@
 #navigation, #main-content {
     margin-top: 10px;
 }
-#navigation-items, #category-items, #town-items {
+#navigation-items, #category-items, #town-items, #status-filter-options {
     list-style-type: none;
     padding: 0;
     font-size: 1.3em;
 }
-#navigation-items .active, #category-items .active, #town-items .active {
+#navigation-items .active, #category-items .active, #town-items .active, #status-filter-options .active {
     background-color: #FFB732;
     padding: 5px;
     border-radius: 30px;

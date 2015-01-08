@@ -1,4 +1,4 @@
-adsApp.factory('adsDataService', function adsDataService($resource, $q) { //TODO: gather all resource methods in one place
+adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO: gather all resource methods in one place
     var pageSizeForAllAdsForUser = 5;
     var pageSizeForAllUserAds = 5;
 
@@ -51,7 +51,7 @@ adsApp.factory('adsDataService', function adsDataService($resource, $q) { //TODO
 
     function getAllUserAds(statusId, selectedPageNumber, userData) {
         var pageSize = '?PageSize=' + pageSizeForAllUserAds;
-        var status = statusId ? "&Status=" + categoryId : '';
+        var status = statusId != null ? "&Status=" + statusId : '';
         var startPage = selectedPageNumber ? '&StartPage=' + selectedPageNumber : '';
 
         var url = 'http://softuni-ads.azurewebsites.net/api/user/ads' + pageSize + status + startPage;

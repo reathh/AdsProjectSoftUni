@@ -2,8 +2,10 @@ adsApp.controller('MainController', function MainController($scope, $location, u
     $scope.currentPageString = "Home";
     $scope.showPleaseLoginPanel = !userDataService.isUserLoggedIn();
     $scope.showUserInfo = userDataService.isUserLoggedIn();
+    $scope.showUserAdStatusOptions = false;
     $scope.currentUserUsername = userDataService.getCurrentUser() != null ? userDataService.getCurrentUser().username : '';
     $scope.pleaseLoginPanel = 'templates/general/please-login-panel.html';
+    $scope.userAdStatusOptions = 'templates/user/user-ad-filter-options-directive.html';
     $scope.logout = logout;
 
     userDataService.currentUserWatch().then(null, null, function (user) {
@@ -15,17 +17,26 @@ adsApp.controller('MainController', function MainController($scope, $location, u
     });
 
     $scope.$on('$locationChangeStart', function() {
-        if($location.url() == '/view/ads') {
-            $scope.currentPageString = "Home";
-        } else if ($location.url() == '/login') {
-            $scope.currentPageString = "Login";
-        } else if ($location.url() == '/register') {
-            $scope.currentPageString = "Register";
-        } else if ($location.url() == '/add/ad') {
-            $scope.currentPageString = "Add New Ad";
-        } else if ($location.url() == '/view/user/ads') {
-            $scope.currentPageString = "User Ads";
+        var location = $location.path();
+        switch (location) {
+            case '/view/ads':
+                $scope.currentPageString = "Home";
+                break;
+            case '/login':
+                $scope.currentPageString = "Login";
+                break;
+            case '/register':
+                $scope.currentPageString = "Register";
+                break;
+            case '/add/ad':
+                $scope.currentPageString = "Add New Ad";
+                break;
+            case '/view/user/ads':
+                $scope.currentPageString = "User Ads";
+                break;
         }
+
+        $scope.showUserAdStatusOptions = $location.url() == '/view/user/ads';
     });
 
     function logout() {

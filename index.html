@@ -23,8 +23,9 @@
                     </ul>
                 </div>
             </div>
-            <div id="please-login-panel" class="text-center" ng-show="showPleaseLoginPanel" ng-include="pleaseLoginPanel">
-
+            <div id="please-login-panel" class="text-center" ng-show="showPleaseLoginPanel" ng-include="pleaseLoginPanel"></div>
+            <div id="user-ad-status-options" ng-if="showUserAdStatusOptions">
+                <div user-ad-filter-options></div>
             </div>
         </div>
         <div class="col-md-9" id="main-content" ng-view>
@@ -57,6 +58,7 @@
 <script src="js/directives/editButtonDirective.js"></script>
 <script src="js/directives/publishAgainButtonDirective.js"></script>
 <script src="js/directives/deleteButtonDirective.js"></script>
+<script src="js/directives/userAdFilterOptions.js"></script>
 
 <script src="js/services/userDataService.js"></script>
 <script src="js/services/adsDataService.js"></script>
