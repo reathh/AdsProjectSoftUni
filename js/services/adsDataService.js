@@ -85,6 +85,16 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         return resource.deactivateAd();
     }
 
+    function deleteAd(adId, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/Ads/' + adId, {}, {
+            deleteAd: {
+                method:'DELETE',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.deleteAd();
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
@@ -92,6 +102,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         createNewAd: createNewAd,
         getAllUserAds: getAllUserAds,
         publishAdAgain: publishAdAgain,
-        deactivateAd: deactivateAd
+        deactivateAd: deactivateAd,
+        deleteAd: deleteAd
     }
 });

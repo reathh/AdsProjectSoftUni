@@ -64,9 +64,9 @@ function notyTopCenter(type, text, timeInSeconds) {
     });
 }
 
-function notyConfirm(successFunction, cancelFunction) {
+function notyConfirm(text, successFunction, cancelFunction) {
     var n = noty({
-        text: 'Are you sure?',
+        text: text,
         type: 'confirm',
         dismissQueue: false,
         layout: 'center',
