@@ -12,12 +12,9 @@
                 <textarea id="text" class="form-control" ng-model="ad.text" required="required"></textarea>
             </p>
             <p>
-                <label for="image">Image:</label>
-                <input type="file" id="image"
-                       onchange="angular.element(this).scope().fileSelected(this)" />
-            <div class="image-box">
-            <img src="" ng-src="{{ad.imageDataUrl}}" alt="Ad picture"/>
-            </div>
+                <label for="preview-image">Image:</label>
+                <input type="file" ng-model="ad.imageDataUrl" accept="image/*" app-filereader />
+                <img src="" id="preview-image" ng-src="{{ad.imageDataUrl}}" alt="Ad picture"/>
             </p>
             <p>
                 <label for="category">Category:</label>
