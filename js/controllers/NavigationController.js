@@ -10,6 +10,8 @@ adsApp.controller('NavigationController', function NavigationController($scope, 
             $scope.selectedNavigationItem = $scope.navItems[1];
         } else if ($location.url() == '/register') {
             $scope.selectedNavigationItem = $scope.navItems[2];
+        } else if ($location.url() == '/add/ad') {
+            $scope.selectedNavigationItem = $scope.navItems[2];
         }
     });
 
