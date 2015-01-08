@@ -66,13 +66,13 @@
 .ad-description {
     padding: 10px;
 }
-.owner-info>div {
+.owner-info>div, .ad-info>div {
     margin-top: 5px;
 }
-.ad-description, .ad-name, .ad-email, .ad-phone {
+.ad-description, .ad-name, .ad-email, .ad-phone, .ad-category, .ad-town {
     text-align: center;
 }
-.ad-name, .ad-email, .ad-phone {
+.ad-name, .ad-email, .ad-phone, .ad-category, .ad-town {
     word-wrap: break-word;
     display: inline-block;
     padding: 5px 0;
@@ -94,4 +94,16 @@
     width: 50%;
     height: 55%;
     padding: 10px;
+}
+
+.user-ads-left-column {
+    border-right: 1px solid #008000;
+}
+
+.ad-status {
+    padding: 5px 0;
+    border-radius: 5px;
+}
+.user-ad-buttons>div>div {
+    margin-top: 5px;
 }

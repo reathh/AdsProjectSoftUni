@@ -14,6 +14,9 @@ var adsApp = angular
             .when('/add/ad', {
                 templateUrl: 'templates/user/add-new-ad.html'
             })
+            .when('/view/user/ads', {
+                templateUrl: 'templates/user/view-user-ads.html'
+            })
             .otherwise({redirectTo: '/view/ads'});
     });
 

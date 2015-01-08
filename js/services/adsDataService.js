@@ -1,7 +1,9 @@
-adsApp.factory('adsDataService', function adsDataService($resource, $q) {
+adsApp.factory('adsDataService', function adsDataService($resource, $q) { //TODO: gather all resource methods in one place
+    var pageSizeForAllAdsForUser = 5;
+    var pageSizeForAllUserAds = 5;
 
     function getAllAds(categoryId, townId, selectedPageNumber) {
-        var pageSize = '?PageSize=5';
+        var pageSize = '?PageSize=' + pageSizeForAllAdsForUser;
         var categoryId = categoryId ? "&CategoryId=" + categoryId : '';
         var townId = townId ? "&TownId=" + townId : '';
         var startPage = selectedPageNumber ? '&StartPage=' + selectedPageNumber : '';
@@ -30,12 +32,6 @@ adsApp.factory('adsDataService', function adsDataService($resource, $q) {
             'imageDataUrl': adData.imageDataUrl
         };
 
-        //var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/ads');
-        //resource.save(ad, function (data) {
-        //    defer.resolve();
-        //}, function (err) {
-        //    defer.reject();
-        //});
         var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/ads', {}, {
             createAd: {
                 method:'POST',
@@ -52,10 +48,50 @@ adsApp.factory('adsDataService', function adsDataService($resource, $q) {
 
         return defer.promise;
     }
+
+    function getAllUserAds(statusId, selectedPageNumber, userData) {
+        var pageSize = '?PageSize=' + pageSizeForAllUserAds;
+        var status = statusId ? "&Status=" + categoryId : '';
+        var startPage = selectedPageNumber ? '&StartPage=' + selectedPageNumber : '';
+
+        var url = 'http://softuni-ads.azurewebsites.net/api/user/ads' + pageSize + status + startPage;
+        var resource = $resource(url, {}, {
+            get: {
+                method:'GET',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+
+        return resource.get();
+    }
+
+    function publishAdAgain(adId, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/Ads/PublishAgain/' + adId, {}, {
+            publishAdAgain: {
+                method:'PUT',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.publishAdAgain();
+    }
+
+    function deactivateAd(adId, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/Ads/Deactivate/' + adId, {}, {
+            deactivateAd: {
+                method:'PUT',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.deactivateAd();
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
         getAllTowns: getAllTowns,
-        createNewAd: createNewAd
+        createNewAd: createNewAd,
+        getAllUserAds: getAllUserAds,
+        publishAdAgain: publishAdAgain,
+        deactivateAd: deactivateAd
     }
 });

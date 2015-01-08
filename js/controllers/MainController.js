@@ -23,6 +23,8 @@ adsApp.controller('MainController', function MainController($scope, $location, u
             $scope.currentPageString = "Register";
         } else if ($location.url() == '/add/ad') {
             $scope.currentPageString = "Add New Ad";
+        } else if ($location.url() == '/view/user/ads') {
+            $scope.currentPageString = "User Ads";
         }
     });
 
