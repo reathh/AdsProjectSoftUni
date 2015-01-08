@@ -63,3 +63,32 @@ function notyTopCenter(type, text, timeInSeconds) {
         timeout: timeInSeconds * 1000
     });
 }
+
+function notyConfirm(successFunction, cancelFunction) {
+    var n = noty({
+        text: 'Are you sure?',
+        type: 'confirm',
+        dismissQueue: false,
+        layout: 'center',
+        theme: 'defaultTheme',
+        buttons: [
+            {addClass: 'btn btn-primary', text: 'Ok', onClick: function($noty) {
+                if (successFunction) {
+                    successFunction();
+                }
+                $noty.close();
+            }
+            },
+            {addClass: 'btn btn-danger', text: 'Cancel', onClick: function($noty) {
+                if (cancelFunction) {
+                    cancelFunction()
+                }
+                $noty.close();
+            }
+            }
+        ]
+
+
+    })
+
+}

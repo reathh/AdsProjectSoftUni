@@ -35,20 +35,26 @@ adsApp.controller('ViewUserAdsController', function ($scope, $location, $sce, us
     }
 
     function publishAdAgain(adId) {
-        adsDataService.publishAdAgain(adId, userDataService.getCurrentUser()).$promise.then(function () {
-            $scope.ads = adsDataService.getAllUserAds($scope.statusId, $scope.selectedPageNumber, userDataService.getCurrentUser());
-            notyTopCenter('success', 'Ad submitted for publishing', 2);
-        }, function () {
-            notyTopCenter('error', 'There was a problem submitting your ad for publishing', 2);
-        })
+        function publish() {
+            adsDataService.publishAdAgain(adId, userDataService.getCurrentUser()).$promise.then(function () {
+                $scope.ads = adsDataService.getAllUserAds($scope.statusId, $scope.selectedPageNumber, userDataService.getCurrentUser());
+                notyTopCenter('success', 'Ad submitted for publishing', 2);
+            }, function () {
+                notyTopCenter('error', 'There was a problem submitting your ad for publishing', 2);
+            })
+        }
+        notyConfirm(publish);
     }
 
     function deactivateAd(adId) {
-        adsDataService.deactivateAd(adId, userDataService.getCurrentUser()).$promise.then(function () {
-            $scope.ads = adsDataService.getAllUserAds($scope.statusId, $scope.selectedPageNumber, userDataService.getCurrentUser());
-            notyTopCenter('success', 'Ad successfully deactivated ', 2);
-        }, function () {
-            notyTopCenter('error', 'There was a problem deactivating your ad', 2);
-        })
+        function deactivate() {
+            adsDataService.deactivateAd(adId, userDataService.getCurrentUser()).$promise.then(function () {
+                $scope.ads = adsDataService.getAllUserAds($scope.statusId, $scope.selectedPageNumber, userDataService.getCurrentUser());
+                notyTopCenter('success', 'Ad successfully deactivated ', 2);
+            }, function () {
+                notyTopCenter('error', 'There was a problem deactivating your ad', 2);
+            })
+        }
+        notyConfirm(deactivate);
     }
 });
