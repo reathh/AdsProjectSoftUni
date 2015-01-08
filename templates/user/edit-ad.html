@@ -13,8 +13,13 @@
             </p>
             <p>
                 <label for="preview-image">Image:</label>
+                <div ng-if="ad.imageDataUrl != null">
+                    <img src="" id="preview-image" ng-src="{{ad.imageDataUrl}}" alt="Ad picture"/>
+                </div>
+                <div ng-if="ad.imageDataUrl == null">
+                    Your ad currently doesn't have a picture
+                </div>
                 <input type="file" ng-model="ad.imageDataUrl" accept="image/*" app-filereader />
-                <img src="" id="preview-image" ng-src="{{ad.imageDataUrl}}" alt="Ad picture"/>
             </p>
             <p>
                 <label for="category">Category:</label>
