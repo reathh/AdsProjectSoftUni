@@ -20,6 +20,9 @@ var adsApp = angular
             .when('/edit/ad/:id', {
                 templateUrl: 'templates/user/edit-ad.html'
             })
+            .when('/edit/profile', {
+                templateUrl: 'templates/user/edit-profile.html'
+            })
             .otherwise({redirectTo: '/view/ads'});
     });
 

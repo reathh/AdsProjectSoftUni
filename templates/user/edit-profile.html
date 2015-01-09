@@ -1,0 +1,35 @@
+<div ng-controller="EditProfileController">
+    <div class="row">
+        <div id="edit-profile-noty-area"></div>
+        <div class="green-box col-md-6 text-center">
+            <h3>Edit Profile</h3>
+            <hr/>
+            <form name="editProfileForm">
+                <label for="name">Name: </label><input type="text" class="form-control" ng-model="user.name" id="name" required="required"/>
+                <label for="email">Email: </label><input type="text" class="form-control" ng-model="user.email" id="email" required="required"/>
+                <label for="phone">Phone: </label><input type="text" class="form-control" ng-model="user.phoneNumber" id="phone" required="required"/>
+                <label for="town">Town:</label>
+                <select id="town" ng-model="user.townId">
+                    <option value="{{nullData}}">(None)</option>
+                    <option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+                </select>
+                <div>
+                    <button class="btn btn-default btn-success" ng-disabled="editProfileForm.$invalid" ng-click="editProfile(user)">Edit Profile</button>
+                </div>
+            </form>
+
+        </div>
+        <div class="green-box col-md-6 text-center">
+            <h3>Change Password</h3>
+            <hr/>
+            <form name="changePasswordForm">
+                <label for="old-password">Old Password: </label><input type="password" class="form-control" ng-model="passwordData.oldPassword" id="old-password" required="required"/>
+                <label for="new-password">New Password: </label><input type="password" class="form-control" ng-model="passwordData.newPassword" id="new-password" required="required"/>
+                <label for="confirm-password">Confirm Password: </label><input type="password" class="form-control" ng-model="passwordData.confirmPassword" id="confirm-password" required="required"/>
+                <div>
+                    <button class="btn btn-default btn-success" ng-disabled="changePasswordForm.$invalid" ng-click="changePassword(passwordData)">Edit Profile</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

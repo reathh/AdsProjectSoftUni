@@ -67,6 +67,16 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         return JSON.parse(localStorage.getItem('user'));
     }
 
+    function getCurrentUserFromServer(userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/profile', {}, {
+            get: {
+                method: 'GET',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.get();
+    }
+
     function setCurrentUser(user) {
         localStorage.setItem('user', user);
         changeOfUserWatch.notify(JSON.parse(localStorage.getItem('user')));
@@ -76,6 +86,27 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         localStorage.removeItem('user');
         changeOfUserWatch.notify(JSON.parse(localStorage.getItem('user')));
     }
+
+    function editUser(user, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/profile', {}, {
+            editProfile: {
+                method: 'PUT',
+                headers: {'Authorization': userData.access_token}
+            }
+        });
+        return resource.editProfile(user);
+    }
+
+    function changePassword(passwordData, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/changepassword', {}, {
+            changePassword: {
+                method: 'PUT',
+                headers: {'Authorization': userData.access_token}
+            }
+        });
+        return resource.changePassword(passwordData);
+    }
+
     return {
         isUserLoggedIn: isUserLoggedIn,
         isUserAdmin: isUserAdmin,
@@ -83,6 +114,9 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         register: register,
         logout: logout,
         currentUserWatch: currentUserWatch,
-        getCurrentUser: getCurrentUser
+        getCurrentUser: getCurrentUser,
+        getCurrentUserFromServer: getCurrentUserFromServer,
+        editUser: editUser,
+        changePassword: changePassword
      }
 });

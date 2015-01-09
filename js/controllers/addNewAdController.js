@@ -1,6 +1,6 @@
 adsApp.controller('addNewAdController', function ($scope, $rootScope, $location, adsDataService, userDataService) {
         if (!userDataService.isUserLoggedIn()) {
-            $location.url('/view/ads');
+            $location.url('/login');
             notyTopCenter('alert', 'You must be logged in to see this page', 2);
         }
 

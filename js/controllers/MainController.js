@@ -34,6 +34,9 @@ adsApp.controller('MainController', function MainController($scope, $location, u
             case '/view/user/ads':
                 $scope.currentPageString = "User Ads";
                 break;
+            case '/edit/profile':
+                $scope.currentPageString = "Edit Profile";
+                break;
         }
 
         $scope.showUserAdStatusOptions = $location.url() == '/view/user/ads';

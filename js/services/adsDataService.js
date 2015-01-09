@@ -1,6 +1,6 @@
 adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO: gather all resource methods in one place
-    var pageSizeForAllAdsForUser = 5;
-    var pageSizeForAllUserAds = 5;
+    var pageSizeForAllAdsForUser = 4;
+    var pageSizeForAllUserAds = 4;
 
     function getAllAds(categoryId, townId, selectedPageNumber) {
         var pageSize = '?PageSize=' + pageSizeForAllAdsForUser;
