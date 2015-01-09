@@ -9,23 +9,9 @@ adsApp.controller('addNewAdController', function ($scope, $rootScope, $location,
         $scope.categories = adsDataService.getAllCategories();
         $scope.towns = adsDataService.getAllTowns();
 
-        $scope.fileSelected = function(fileInputField) { //TODO: Try to use ng-model for visualizing. There are directives in the internet
-            delete $scope.adData.imageDataUrl;
-            var file = fileInputField.files[0];
-            if (file.type.match(/image\/.*/)) {
-                var reader = new FileReader();
-                reader.onload = function() {
-                    $scope.adData.imageDataUrl = reader.result;
-                    $(".image-box").html("<img class='white-box' id='preview-image' src='" + reader.result + "'>");
-                };
-                reader.readAsDataURL(file);
-            } else {
-                $(".image-box").html("<p>File type not supported!</p>");
-            }
-        };
 
-        $scope.publishAd = function(adData) {
-            adsDataService.createNewAd(adData, userDataService.getCurrentUser()).then(function () {
+        $scope.publishAd = function(ad) {
+            adsDataService.createNewAd(ad, userDataService.getCurrentUser()).then(function () {
                     notyTopCenter('success', "Advertisement submitted for approval. Once approved, it will be published.", 2);
                     $location.url("/view/user/ads");
                 },
