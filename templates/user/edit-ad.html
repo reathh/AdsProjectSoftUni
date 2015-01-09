@@ -1,7 +1,7 @@
 <div ng-controller="EditAdController">
     <div class="green-box text-center">
-        <div id="add-new-ad-noty-area"></div>
-        <form name="addNewAdForm" class="text-center">
+        <div id="edit-ad-noty-area"></div>
+        <form name="editAdForm" class="text-center">
             <h2>Edit Ad</h2>
             <p>
                 <label for="title">Title:</label>
@@ -15,9 +15,15 @@
                 <label for="preview-image">Image:</label>
                 <div ng-if="ad.imageDataUrl != null">
                     <img src="" id="preview-image" ng-src="{{ad.imageDataUrl}}" alt="Ad picture"/>
+                    <div>
+                        <button class="btn btn-mini btn-success" ng-click="ad.imageDataUrl=null">Delete Picture</button>
+                    </div>
                 </div>
                 <div ng-if="ad.imageDataUrl == null">
                     Your ad currently doesn't have a picture
+                    <div ng-if="imageFromServer != null">
+                        <button class="btn btn-mini btn-success" ng-click="ad.imageDataUrl = imageFromServer">Revert old picture</button>
+                    </div>
                 </div>
                 <input type="file" ng-model="ad.imageDataUrl" accept="image/*" app-filereader />
             </p>
@@ -36,8 +42,8 @@
                 </select>
             </p>
             <p>
-                <button ng-click="publishAd(ad)" ng-disabled="addNewAdForm.$invalid" class="btn btn-default">Publish</button>
-                <a href="#/user/ads">Cancel</a>
+                <button ng-click="editAd(ad)" ng-disabled="editAdForm.$invalid" class="btn btn-default">Publish</button>
+                <a href="#/view/user/ads">Cancel</a>
             <p>
         </form>
     </div>

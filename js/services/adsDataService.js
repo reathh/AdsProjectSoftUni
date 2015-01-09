@@ -107,6 +107,25 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         return resource.deleteAd();
     }
 
+    function editAd(userData, adId, newTitle, newText, changeImage, imageDataUrl, categoryId, townId) {
+        var ad = {
+            'title': newTitle,
+            'text': newText,
+            'changeImage' : changeImage,
+            'imageDataUrl': imageDataUrl,
+            'categoryId': categoryId,
+            'townId': townId
+        };
+
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/Ads/' + adId, {}, {
+            editAd: {
+                method:'PUT',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.editAd(ad);
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
@@ -116,6 +135,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         publishAdAgain: publishAdAgain,
         deactivateAd: deactivateAd,
         deleteAd: deleteAd,
-        getAd: getAd
+        getAd: getAd,
+        editAd: editAd
     }
 });
