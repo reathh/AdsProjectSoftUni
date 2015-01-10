@@ -1,6 +1,6 @@
 <div class="green-box">
     <div class="row">
-        <span class="pull-right ad-date col-md-2">{{ad.date | date: 'd-MMM-yyyy'}}</span>
+        <span class="pull-right ad-date col-md-2">{{ad.date | date: 'dd-MMM-yyyy'}}</span>
         <h4 class="ad-title col-md-10">{{ad.title}}</h4>
         <div class="clearfix"></div>
     </div>
@@ -17,15 +17,15 @@
             <div class="text-right owner-info">
                 <div>
                     <span>Name</span>
-                    <div class="white-box ad-name">{{ad.ownerName}}</div>
+                    <div class="white-box owner-name">{{ad.ownerName | valueOrNull}}</div>
                 </div>
                 <div>
                     <span>Email</span>
-                    <div class="white-box ad-email">{{ad.ownerEmail}}</div>
+                    <div class="white-box owner-email">{{ad.ownerEmail | valueOrNull}}</div>
                 </div>
                 <div>
                     <span>Tel.</span>
-                    <div class="white-box ad-phone">{{ad.ownerPhone}}</div>
+                    <div class="white-box owner-phone">{{ad.ownerPhone | valueOrNull}}</div>
                 </div>
             </div>
         </div>

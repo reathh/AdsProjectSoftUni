@@ -6,7 +6,7 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
     }
 
     function isUserAdmin() {
-        return false;
+        return getCurrentUser() != null ? getCurrentUser().isAdmin : false;
     }
 
     function login(username,password) {
@@ -19,9 +19,7 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
 
         var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/login');
         resource.save(userFromInputData, function (data) {
-            var user = {};
-            user['access_token'] = data['token_type'] + ' ' + data['access_token'];
-            user['username'] = data['username'];
+            var user = createUserObjectForLocalStorage(data);
             setCurrentUser(JSON.stringify(user));
 
             defer.resolve(data);
@@ -47,9 +45,7 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
 
             var resource = $resource('http://softuni-ads.azurewebsites.net/api/user/register');
         resource.save(userFromInputData, function (data) {
-            var user = {};
-            user['access_token'] = data['token_type'] + ' ' + data['access_token'];
-            user['username'] = data['username'];
+           var user = createUserObjectForLocalStorage(data);
             setCurrentUser(JSON.stringify(user));
 
             defer.resolve(data);
@@ -57,6 +53,14 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
             defer.reject(err);
         });
         return defer.promise;
+    }
+
+    function createUserObjectForLocalStorage(data) {
+        var user = {};
+        user['access_token'] = data['token_type'] + ' ' + data['access_token'];
+        user['username'] = data['username'];
+        user['isAdmin'] = data['isAdmin'] == 'true';
+        return user;
     }
 
     function currentUserWatch() {

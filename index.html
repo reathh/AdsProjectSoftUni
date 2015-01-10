@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="css/app.css" />
 </head>
 <body ng-app="adsApp" ng-controller="MainController" ng-cloak>
-<div id="top-panel" class="text-center">
-    <h2>Ads - {{currentPageString}}</h2>
+<div id="top-panel" ng-class="{'text-center': true, 'yellow-background': isUserAdmin}">
+    <h2>Ads<div class="inline" ng-if="isUserAdmin"> Administration</div> - {{currentPageString}}</h2>
     <span id="user-info" ng-show="showUserInfo"><a href="#/view/ads">{{currentUserUsername}}</a> - <a href="#/view/ads" class="btn btn-sm" ng-click="logout()">Logout</a></span>
 </div>
 <div id="container" >
@@ -39,17 +39,22 @@
 <script src="node_modules/angular-resource/angular-resource.js"></script>
 <script src="node_modules/angular-route/angular-route.js"></script>
 
+<script src="libs/date.js"></script>
+
 <script src="js/app.js"></script>
 
-<script src="js/controllers/MainController.js"></script>
-<script src="js/controllers/NavigationController.js"></script>
-<script src="js/controllers/viewAdsAsUserController.js"></script>
-<script src="js/controllers/loginController.js"></script>
-<script src="js/controllers/registerController.js"></script>
-<script src="js/controllers/addNewAdController.js"></script>
-<script src="js/controllers/ViewUserAdsController.js"></script>
-<script src="js/controllers/EditAdController.js"></script>
-<script src="js/controllers/EditProfileController.js"></script>
+<script src="js/controllers/general/MainController.js"></script>
+<script src="js/controllers/general/NavigationController.js"></script>
+<script src="js/controllers/user/viewAdsAsUserController.js"></script>
+<script src="js/controllers/general/loginController.js"></script>
+<script src="js/controllers/general/registerController.js"></script>
+<script src="js/controllers/user/addNewAdController.js"></script>
+<script src="js/controllers/user/ViewUserAdsController.js"></script>
+<script src="js/controllers/user/EditAdController.js"></script>
+<script src="js/controllers/user/EditProfileController.js"></script>
+<script src="js/controllers/admin/ViewAdsAsAdminController.js"></script>
+<script src="js/controllers/admin/EditAdAsAdminController.js"></script>
+<script src="js/controllers/general/StatusChooserController.js"></script>
 
 <script src="js/directives/navigationItemDirective.js"></script>
 <script src="js/directives/adItemDirective.js"></script>
@@ -63,6 +68,10 @@
 <script src="js/directives/deleteButtonDirective.js"></script>
 <script src="js/directives/userAdFilterOptions.js"></script>
 <script src="js/directives/userAdItemDirective.js"></script>
+<script src="js/directives/adminAdItemDirective.js"></script>
+
+<script src="js/filters/statusNameToIdFilter.js"></script>
+<script src="js/filters/valueOrNullFilter.js"></script>
 
 <script src="js/services/userDataService.js"></script>
 <script src="js/services/adsDataService.js"></script>

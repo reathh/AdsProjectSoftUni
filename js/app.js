@@ -2,6 +2,7 @@ var adsApp = angular
     .module('adsApp', ['ngResource', 'ngRoute'])
     .config(function($routeProvider) {
         $routeProvider
+            //User
             .when('/view/ads', {
                 templateUrl: 'templates/user/view-all-ads.html'
             })
@@ -23,6 +24,14 @@ var adsApp = angular
             .when('/edit/profile', {
                 templateUrl: 'templates/user/edit-profile.html'
             })
+            //Admin
+            .when('/admin/view/ads', {
+                templateUrl: 'templates/admin/view-ads.html'
+            })
+            .when('/admin/edit/ad/:id', {
+                templateUrl: 'templates/admin/edit-ad.html'
+            })
+
             .otherwise({redirectTo: '/view/ads'});
     });
 

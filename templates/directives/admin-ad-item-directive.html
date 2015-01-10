@@ -1,0 +1,54 @@
+<div class="green-box">
+    <div class="row">
+        <span class="pull-right ad-date col-md-2">{{ad.date | date: 'dd-MMM-yyyy'}}</span>
+        <h4 class="ad-title col-md-10">{{ad.title}}</h4>
+        <div class="clearfix"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="white-box text-center">
+                <img src="" alt="Ad Picture" ng-src="{{ad.imageDataUrl}}" class="ad-picture"/>
+            </div>
+            <div class="white-box ad-status text-center">
+                {{ad.status}}
+            </div>
+            <div class="admin-ad-buttons">
+                <div ng-if="ad.status != 'Published' && ad.status != 'Inactive'"><button class="btn btn-success btn-block" ng-click="approveAd(ad.id)">Approve</button></div>
+                <div ng-if="ad.status != 'Rejected' && ad.status != 'Inactive'"><button class="btn btn-success btn-block" ng-click="rejectAd(ad.id)">Reject</button></div>
+                <a href="#/admin/edit/ad/{{ad.id}}" class="btn btn-success btn-block">Edit</a>
+                <button class="btn btn-success btn-block" ng-click="deleteAd(ad.id)">Delete</button>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="white-box ad-description">
+                {{ad.text}}
+            </div>
+            <div class="text-right owner-info">
+                <div>
+                    <span>Username</span>
+                    <div class="white-box owner-username">{{ad.ownerUsername | valueOrNull}}</div>
+                </div>
+                <div>
+                    <span>Name</span>
+                    <div class="white-box owner-name">{{ad.ownerName | valueOrNull}}</div>
+                </div>
+                <div>
+                    <span>Email</span>
+                    <div class="white-box owner-email">{{ad.ownerEmail | valueOrNull}}</div>
+                </div>
+                <div>
+                    <span>Tel.</span>
+                    <div class="white-box owner-phone">{{ad.ownerPhone | valueOrNull}}</div>
+                </div>
+                <div>
+                    <span>Category</span>
+                    <div class="white-box owner-phone">{{ad.categoryName | valueOrNull}}</div>
+                </div>
+                <div>
+                    <span>Town</span>
+                    <div class="white-box owner-phone">{{ad.townName | valueOrNull}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

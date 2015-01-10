@@ -1,0 +1,67 @@
+<div ng-controller="EditAdAsAdminController">
+    <div class="green-box text-center">
+        <div id="edit-ad-noty-area"></div>
+        <form name="editAdFormAsAdmin" class="text-center">
+            <h2>Edit Ad</h2>
+            <p>
+                <label for="date">Date:</label>
+                <input id="date" type="date" ng-model="ad.dateAsString" value="{{ad.dateAsString}}"/>
+            </p>
+            <p>
+                <label for="username">Username:</label>
+                <input type="text" id="username" class="form-control" ng-model="ad.ownerUsername" required="required" />
+            </p>
+            <p>
+                <label for="title">Title:</label>
+                <input type="text" id="title" class="form-control" ng-model="ad.title" required="required" />
+            </p>
+            <p>
+                <label for="text">Text:</label>
+                <textarea id="text" class="form-control" ng-model="ad.text" required="required"></textarea>
+            </p>
+            <p>
+                <label for="preview-image">Image:</label>
+                <div ng-if="ad.imageDataUrl != null">
+                    <img src="" id="preview-image" ng-src="{{ad.imageDataUrl}}" alt="Ad picture"/>
+                    <div>
+                        <button class="btn btn-mini btn-success" ng-click="ad.imageDataUrl=null">Delete Picture</button>
+                    </div>
+                </div>
+                <div ng-if="ad.imageDataUrl == null">
+                    Your ad currently doesn't have a picture
+                    <div ng-if="imageFromServer != null">
+                        <button class="btn btn-mini btn-success" ng-click="ad.imageDataUrl = imageFromServer">Revert old picture</button>
+                    </div>
+                </div>
+            <input type="file" ng-model="ad.imageDataUrl" accept="image/*" app-filereader />
+            </p>
+            <p>
+                <label for="category">Category:</label>
+                <select id="category" ng-model="ad.categoryId">
+                    <option value="{{nullData}}">(None)</option>
+                    <option ng-repeat="c in categories" value="{{c.id}}">{{c.name}}</option>
+                </select>
+            </p>
+            <p>
+                <label for="town">Town:</label>
+                <select id="town" ng-model="ad.townId">
+                    <option value="{{nullData}}">(None)</option>
+                    <option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+                </select>
+            </p>
+            <p>
+                <label for="status">Status:</label>
+                <select id="status" ng-model="ad.status">
+                    <option value="0">Inactive</option>
+                    <option value="1">Waiting Approval</option>
+                    <option value="2">Published</option>
+                    <option value="3">Rejected</option>
+                </select>
+            </p>
+            <p>
+                <button ng-click="editAdAsAdmin(ad)" ng-disabled="editAdFormAsAdmin.$invalid" class="btn btn-default">Publish</button>
+                <a href="#/view/admin/ads">Cancel</a>
+            <p>
+        </form>
+    </div>
+</div>

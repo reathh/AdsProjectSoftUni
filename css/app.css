@@ -2,6 +2,10 @@
     display: none !important;
 }
 
+.inline {
+    display: inline;
+}
+
 #top-panel {
     background-color: greenyellow;
     padding: 10px;
@@ -9,6 +13,10 @@
 }
 #top-panel h2 {
     margin: 0;
+}
+
+.yellow-background {
+    background-color: #ffff00 !important;
 }
 .green-box {
     padding: 20px;
@@ -33,6 +41,7 @@
     list-style-type: none;
     padding: 0;
     font-size: 1.3em;
+    word-wrap: break-word;
 }
 #navigation-items .active, #category-items .active, #town-items .active, #status-filter-options .active {
     background-color: #FFB732;
@@ -69,11 +78,11 @@
 .owner-info>div, .ad-info>div {
     margin-top: 5px;
 }
-.ad-description, .ad-name, .ad-email, .ad-phone, .ad-category, .ad-town {
+.ad-description, .owner-name, .owner-email, .owner-phone, .ad-category, .ad-town, .owner-username {
+    word-wrap: break-word;
     text-align: center;
 }
-.ad-name, .ad-email, .ad-phone, .ad-category, .ad-town {
-    word-wrap: break-word;
+.owner-name, .owner-email, .owner-phone, .ad-category, .ad-town, .owner-username {
     display: inline-block;
     padding: 5px 0;
     width: 40%;
@@ -106,4 +115,9 @@
 }
 .user-ad-buttons>div>div {
     margin-top: 5px;
+}
+
+.admin-ad-buttons button, .admin-ad-buttons a {
+    margin-top: 5px;
+    margin-right: 5px;
 }

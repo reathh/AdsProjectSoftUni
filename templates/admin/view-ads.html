@@ -1,0 +1,29 @@
+<div ng-controller="ViewAdsAsAdminController">
+    <div id="top-of-ads"></div>
+    <div class="col-md-9">
+        <div ng-repeat="ad in ads.ads">
+            <div admin-ad-item-directive></div>
+        </div>
+        <div class="text-center">
+            <div paging-directive></div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="green-box text-center">
+            <h3>Categories</h3>
+            <hr>
+            <ul id="category-items">
+                <li ng-class="{'category-item': true, 'active': isCategoryItemSelected(0)}"><span ng-click="changeSelectedCategory(0)">All</span></li>
+                <li category-item-directive></li>
+            </ul>
+        </div>
+        <div class="green-box text-center">
+            <h3>Towns</h3>
+            <hr>
+            <ul id="town-items">
+                <li ng-class="{'town-item': true, 'active': isTownItemSelected(0)}"><span ng-click="changeSelectedTown(0)">All</span></li>
+                <li town-item-directive></li>
+            </ul>
+        </div>
+    </div>
+</div>

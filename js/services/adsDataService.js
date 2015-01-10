@@ -1,19 +1,50 @@
 adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO: gather all resource methods in one place
     var pageSizeForAllAdsForUser = 4;
     var pageSizeForAllUserAds = 4;
+    var pageSizeForAllAllAdsAsAdmin = 4;
 
     function getAllAds(categoryId, townId, selectedPageNumber) {
         var pageSize = '?PageSize=' + pageSizeForAllAdsForUser;
-        var categoryId = categoryId ? "&CategoryId=" + categoryId : '';
-        var townId = townId ? "&TownId=" + townId : '';
+        var categoryIdAsString = categoryId ? "&CategoryId=" + categoryId : '';
+        var townIdAsString = townId ? "&TownId=" + townId : '';
         var startPage = selectedPageNumber ? '&StartPage=' + selectedPageNumber : '';
 
-        var resource = $resource('http://softuni-ads.azurewebsites.net/api/Ads' + pageSize + categoryId + townId + startPage);
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/Ads' + pageSize + categoryIdAsString + townIdAsString + startPage);
+        return resource.get();
+    }
+
+    function getAllAdsAsAdmin(userData, statusId, categoryId, townId, selectedPageNumber) {
+        var pageSize = '?PageSize=' + pageSizeForAllAdsForUser;
+        var statusIdAsString = statusId != null ? '&Status=' + statusId : '';
+        var categoryIdAsString = categoryId ? "&CategoryId=" + categoryId : '';
+        var townIdAsString = townId ? "&TownId=" + townId : '';
+        var startPage = selectedPageNumber ? '&StartPage=' + selectedPageNumber : '';
+
+        var url = 'http://softuni-ads.azurewebsites.net/api/admin/ads' + pageSize + statusIdAsString + categoryIdAsString + townIdAsString + startPage;
+        var resource = $resource(url, {}, {
+            get: {
+                method:'GET',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+
         return resource.get();
     }
 
     function getAd(adId, userData) {
         var url = 'http://softuni-ads.azurewebsites.net/api/user/ads/' + adId;
+        var resource = $resource(url, {}, {
+            get: {
+                method:'GET',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+
+        return resource.get();
+    }
+
+    function getAdAsAdmin(adId, userData) {
+        var url = 'http://softuni-ads.azurewebsites.net/api/admin/ads/' + adId;
         var resource = $resource(url, {}, {
             get: {
                 method:'GET',
@@ -126,6 +157,46 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         return resource.editAd(ad);
     }
 
+    function editAdAsAdmin(userData, ad) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/Ads/' + ad.id, {}, {
+            editAdAsAdmin: {
+                method:'PUT',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.editAdAsAdmin(ad);
+    }
+
+    function approveAd(adId, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/Ads/Approve/' + adId, {}, {
+            approveAd: {
+                method:'PUT',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.approveAd();
+    }
+
+    function rejectAd(adId, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/Ads/Reject/' + adId, {}, {
+            rejectAd: {
+                method:'PUT',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.rejectAd();
+    }
+
+    function adminDeleteAd(adId, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/Ads/' + adId, {}, {
+            deleteAd: {
+                method:'DELETE',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.deleteAd();
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
@@ -136,6 +207,12 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         deactivateAd: deactivateAd,
         deleteAd: deleteAd,
         getAd: getAd,
-        editAd: editAd
+        getAdAsAdmin: getAdAsAdmin,
+        editAd: editAd,
+        editAdAsAdmin: editAdAsAdmin,
+        getAllAdsAsAdmin: getAllAdsAsAdmin,
+        approveAd: approveAd,
+        rejectAd: rejectAd,
+        adminDeleteAd: adminDeleteAd
     }
 });

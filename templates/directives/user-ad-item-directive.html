@@ -18,11 +18,11 @@
                 <div class="text-right ad-info">
                     <div>
                         <span>Category</span>
-                        <div class="white-box ad-category">{{ad.categoryName}}</div>
+                        <div class="white-box ad-category">{{ad.categoryName | valueOrNull}}</div>
                     </div>
                     <div>
                         <span>Town</span>
-                        <div class="white-box ad-town">{{ad.townName}}</div>
+                        <div class="white-box ad-town">{{ad.townName | valueOrNull}}</div>
                     </div>
                 </div>
             </div>
