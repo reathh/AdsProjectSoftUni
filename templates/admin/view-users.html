@@ -1,0 +1,34 @@
+<div ng-controller="ViewUsersController">
+    <div class="green-box text-center table-responsive">
+        <div class="white-box">
+            <table id="users-table" class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Town Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users.users">
+                        <td>{{user.username | valueOrNull}}</td>
+                        <td>{{user.name | valueOrNull}}</td>
+                        <td>
+                            <div ng-if="user.email != null"><a href="mailto:{{user.email}}">{{user.email | valueOrNull}}</a></div>
+                            <div ng-if="user.email == null">Not Filled</div>
+                        </td>
+                        <td>{{user.phoneNumber | valueOrNull}}</td>
+                        <td>{{user.townName | valueOrNull}}</td>
+                        <td>
+                            <button class="btn btm-mini">Edit</button>
+                            <button class="btn btm-mini">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 adsApp.factory('userDataService', function userDataService($resource, $q) {
     var changeOfUserWatch = $q.defer();
+    var numberOfUsersForViewUsersAdminPage = 5;
 
     function isUserLoggedIn() {
         return localStorage.getItem('user') != null;
@@ -111,6 +112,18 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         return resource.changePassword(passwordData);
     }
 
+    function getAllUsers(userData) {
+        var pageSize = '?PageSize=' + numberOfUsersForViewUsersAdminPage;
+        var url = 'http://softuni-ads.azurewebsites.net/api/admin/users' + pageSize;
+        var resource = $resource(url, {}, {
+            getAllUsers: {
+                method: 'GET',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.getAllUsers();
+    }
+
     return {
         isUserLoggedIn: isUserLoggedIn,
         isUserAdmin: isUserAdmin,
@@ -121,6 +134,7 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         getCurrentUser: getCurrentUser,
         getCurrentUserFromServer: getCurrentUserFromServer,
         editUser: editUser,
-        changePassword: changePassword
+        changePassword: changePassword,
+        getAllUsers: getAllUsers
      }
 });
