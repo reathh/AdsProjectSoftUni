@@ -41,6 +41,9 @@ adsApp.controller('MainController', function MainController($scope, $location, u
             case '/admin/view/ads':
                 $scope.currentPageString = "Ads";
                 break;
+            case '/admin/view/users':
+                $scope.currentPageString = "Users";
+                break;
         }
 
         $scope.showUserAdStatusOptions = $location.path() == '/view/user/ads' || $location.path() == '/admin/view/ads';

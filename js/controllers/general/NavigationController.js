@@ -27,6 +27,9 @@ adsApp.controller('NavigationController', function NavigationController($scope, 
             case '/admin/view/ads':
                 changeSelectedNavigationItem($scope.navItems[0]);
                 break;
+            case '/admin/view/users':
+                changeSelectedNavigationItem($scope.navItems[1]);
+                break;
         }
     });
 
