@@ -5,5 +5,33 @@ adsApp.controller('ViewUsersController', function ($scope, $location, userDataSe
         return;
     }
 
-    $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser());
+    $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), $scope.sortByWhat);
+    $scope.sortByWhat = null;
+    $scope.changeSort = changeSort;
+    $scope.whichIconToShow = whichIconToShow;
+
+    $scope.$watch('sortByWhat', function (newValue, oldValue) {
+        if (newValue !== oldValue) {
+           $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), newValue);
+        }
+    });
+
+
+    function changeSort(sortByWhat) {
+        if (sortByWhat == $scope.sortByWhat) {
+            $scope.sortByWhat = '-' + sortByWhat;
+        } else {
+            $scope.sortByWhat = sortByWhat;
+        }
+    }
+
+    function whichIconToShow(element) {
+        if (element == $scope.sortByWhat) {
+            return 'glyphicon glyphicon-hand-up';
+        } else if ('-' + element == $scope.sortByWhat) {
+            return 'glyphicon glyphicon-hand-down';
+        } else {
+            return '';
+        }
+    }
 });

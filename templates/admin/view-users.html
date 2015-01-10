@@ -4,11 +4,11 @@
             <table id="users-table" class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Town Name</th>
+                        <th ng-click="changeSort('UserName')">Username <i ng-class="whichIconToShow('UserName')"></i></th>
+                        <th ng-click="changeSort('Name')">Name <i ng-class="whichIconToShow('Name')"></i></th>
+                        <th ng-click="changeSort('Email')">Email <i ng-class="whichIconToShow('Email')"></i></th>
+                        <th ng-click="changeSort('PhoneNumber')">Phone Number <i ng-class="whichIconToShow('PhoneNumber')"></i></th>
+                        <th ng-click="changeSort('Town.Name')">Town Name <i ng-class="whichIconToShow('Town.Name')"></i></th>
                         <th>Action</th>
                     </tr>
                 </thead>
