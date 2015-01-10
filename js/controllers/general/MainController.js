@@ -43,7 +43,7 @@ adsApp.controller('MainController', function MainController($scope, $location, u
                 break;
         }
 
-        $scope.showUserAdStatusOptions = $location.url() == '/view/user/ads' || $location.url() == '/admin/view/ads';
+        $scope.showUserAdStatusOptions = $location.path() == '/view/user/ads' || $location.path() == '/admin/view/ads';
     });
 
     function logout() {
