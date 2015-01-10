@@ -1,34 +1,39 @@
 <div ng-controller="ViewUsersController">
-    <div class="green-box text-center table-responsive">
+    <div class="green-box text-center">
         <div class="white-box">
-            <table id="users-table" class="table table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <th ng-click="changeSort('UserName')">Username <i ng-class="whichIconToShow('UserName')"></i></th>
-                        <th ng-click="changeSort('Name')">Name <i ng-class="whichIconToShow('Name')"></i></th>
-                        <th ng-click="changeSort('Email')">Email <i ng-class="whichIconToShow('Email')"></i></th>
-                        <th ng-click="changeSort('PhoneNumber')">Phone Number <i ng-class="whichIconToShow('PhoneNumber')"></i></th>
-                        <th ng-click="changeSort('Town.Name')">Town Name <i ng-class="whichIconToShow('Town.Name')"></i></th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="user in users.users">
-                        <td>{{user.username | valueOrNull}}</td>
-                        <td>{{user.name | valueOrNull}}</td>
-                        <td>
-                            <div ng-if="user.email != null"><a href="mailto:{{user.email}}">{{user.email | valueOrNull}}</a></div>
-                            <div ng-if="user.email == null">Not Filled</div>
-                        </td>
-                        <td>{{user.phoneNumber | valueOrNull}}</td>
-                        <td>{{user.townName | valueOrNull}}</td>
-                        <td class="btn-group btn-group-sm">
-                            <button class="btn btn-success">Edit</button>
-                            <button class="btn btn-success">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table id="users-table" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th ng-click="changeSort('UserName')">Username <i ng-class="whichIconToShow('UserName')"></i></th>
+                            <th ng-click="changeSort('Name')">Name <i ng-class="whichIconToShow('Name')"></i></th>
+                            <th ng-click="changeSort('Email')">Email <i ng-class="whichIconToShow('Email')"></i></th>
+                            <th ng-click="changeSort('PhoneNumber')">Phone Number <i ng-class="whichIconToShow('PhoneNumber')"></i></th>
+                            <th ng-click="changeSort('Town.Name')">Town Name <i ng-class="whichIconToShow('Town.Name')"></i></th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users.users">
+                            <td>{{user.username | valueOrNull}}</td>
+                            <td>{{user.name | valueOrNull}}</td>
+                            <td>
+                                <div ng-if="user.email != null"><a href="mailto:{{user.email}}">{{user.email | valueOrNull}}</a></div>
+                                <div ng-if="user.email == null">Not Filled</div>
+                            </td>
+                            <td>{{user.phoneNumber | valueOrNull}}</td>
+                            <td>{{user.townName | valueOrNull}}</td>
+                            <td>
+                                <div class="btn-group btn-group-sm">
+                                    <button class="btn btn-success">Edit</button>
+                                    <button class="btn btn-success">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <div paging-directive number-of-pages="users.numPages" selected-page="selectedPageNumber"></div>
     </div>
 </div>

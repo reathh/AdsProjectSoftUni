@@ -9,9 +9,6 @@ adsApp.controller('ViewUserAdsController', function ($scope, $location, $timeout
     $scope.selectedPageNumber = 1;
 
     $scope.ads = adsDataService.getAllUserAds($scope.selectedStatusOptionId, $scope.selectedPageNumber, userDataService.getCurrentUser());
-    $scope.changeSelectedPageNumber = changeSelectedPageNumber;
-    $scope.isPageNumberSelected = isPageNumberSelected;
-    $scope.getArrayFromNElements = getArrayFromNElements;
     $scope.publishAdAgain = publishAdAgain;
     $scope.deactivateAd = deactivateAd;
     $scope.deleteAd = deleteAd;
@@ -40,18 +37,6 @@ adsApp.controller('ViewUserAdsController', function ($scope, $location, $timeout
         $scope.ads = adsDataService.getAllUserAds($scope.selectedStatusId, $scope.selectedPageNumber, userDataService.getCurrentUser());
     });
 
-
-    function getArrayFromNElements(n) {
-        return new Array(n);
-    }
-
-    function changeSelectedPageNumber(newPageNumber) {
-        $scope.selectedPageNumber = newPageNumber;
-    }
-
-    function isPageNumberSelected (pageNumber) {
-        return $scope.selectedPageNumber === pageNumber;
-    }
 
     function publishAdAgain(adId) {
         function publish() {

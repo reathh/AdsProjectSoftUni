@@ -18,9 +18,6 @@ adsApp.controller('ViewAdsAsAdminController', function ($scope, $location, $anch
     $scope.isCategoryItemSelected = isCategoryItemSelected;
     $scope.changeSelectedTown = changeSelectedTown;
     $scope.isTownItemSelected = isTownItemSelected;
-    $scope.getArrayFromNElements = getArrayFromNElements;
-    $scope.changeSelectedPageNumber = changeSelectedPageNumber;
-    $scope.isPageNumberSelected = isPageNumberSelected;
     $scope.approveAd = approveAd;
     $scope.rejectAd = rejectAd;
     $scope.deleteAd = deleteAd;
@@ -60,18 +57,6 @@ adsApp.controller('ViewAdsAsAdminController', function ($scope, $location, $anch
 
     function isTownItemSelected (townId) {
         return $scope.selectedTownId === townId;
-    }
-
-    function getArrayFromNElements(n) {
-        return new Array(n);
-    }
-
-    function changeSelectedPageNumber(newPageNumber) {
-        $scope.selectedPageNumber = newPageNumber;
-    }
-
-    function isPageNumberSelected (pageNumber) {
-        return $scope.selectedPageNumber === pageNumber;
     }
 
     function approveAd(adId) {

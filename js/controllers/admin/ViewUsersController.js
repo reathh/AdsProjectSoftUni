@@ -5,14 +5,22 @@ adsApp.controller('ViewUsersController', function ($scope, $location, userDataSe
         return;
     }
 
-    $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), $scope.sortByWhat);
+    $scope.selectedPageNumber = 1;
     $scope.sortByWhat = null;
+
+    $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
     $scope.changeSort = changeSort;
     $scope.whichIconToShow = whichIconToShow;
 
     $scope.$watch('sortByWhat', function (newValue, oldValue) {
         if (newValue !== oldValue) {
-           $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), newValue);
+            $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), newValue, $scope.selectedPageNumber);
+        }
+    });
+
+    $scope.$watch('selectedPageNumber', function (newValue, oldValue) {
+        if (newValue !== oldValue) {
+            $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), $scope.sortByWhat, newValue);
         }
     });
 

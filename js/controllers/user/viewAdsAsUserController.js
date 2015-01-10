@@ -16,9 +16,6 @@ adsApp.controller('viewAdsAsUserController', function viewAdsAsUserController($s
     $scope.isCategoryItemSelected = isCategoryItemSelected;
     $scope.changeSelectedTown = changeSelectedTown;
     $scope.isTownItemSelected = isTownItemSelected;
-    $scope.getArrayFromNElements = getArrayFromNElements;
-    $scope.changeSelectedPageNumber = changeSelectedPageNumber;
-    $scope.isPageNumberSelected = isPageNumberSelected;
 
     $scope.$watchGroup(['selectedCategoryId', 'selectedTownId'], function(newValues, oldValues) {
         if (newValues[0] !== oldValues[0] || newValues[1] !== oldValues[1]) {
@@ -49,17 +46,5 @@ adsApp.controller('viewAdsAsUserController', function viewAdsAsUserController($s
 
     function isTownItemSelected (townId) {
         return $scope.selectedTownId === townId;
-    }
-
-    function getArrayFromNElements(n) {
-        return new Array(n);
-    }
-
-    function changeSelectedPageNumber(newPageNumber) {
-        $scope.selectedPageNumber = newPageNumber;
-    }
-
-    function isPageNumberSelected (pageNumber) {
-        return $scope.selectedPageNumber === pageNumber;
     }
 });

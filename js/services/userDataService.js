@@ -112,10 +112,11 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         return resource.changePassword(passwordData);
     }
 
-    function getAllUsers(userData, sortByWhat) {
+    function getAllUsers(userData, sortByWhat, pageNumber) {
         var pageSize = '?PageSize=' + numberOfUsersForViewUsersAdminPage;
         var sort = sortByWhat != null ? '&SortBy=' + sortByWhat : '';
-        var url = 'http://softuni-ads.azurewebsites.net/api/admin/users' + pageSize + sort;
+        var page = pageNumber ? '&StartPage=' + pageNumber : '';
+        var url = 'http://softuni-ads.azurewebsites.net/api/admin/users' + pageSize + sort + page;
         var resource = $resource(url, {}, {
             getAllUsers: {
                 method: 'GET',

@@ -5,7 +5,7 @@
             <div admin-ad-item-directive></div>
         </div>
         <div class="text-center">
-            <div paging-directive></div>
+            <div paging-directive number-of-pages="ads.numPages" selected-page="selectedPageNumber"></div>
         </div>
     </div>
     <div class="col-md-3">
@@ -22,7 +22,7 @@
             <hr>
             <ul id="town-items">
                 <li ng-class="{'town-item': true, 'active': isTownItemSelected(0)}"><span ng-click="changeSelectedTown(0)">All</span></li>
-                <li town-item-directive></li>
+                <li town-item-directive ></li>
             </ul>
         </div>
     </div>
