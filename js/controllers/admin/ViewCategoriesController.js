@@ -12,7 +12,7 @@ adsApp.controller('ViewCategoriesController', function ($scope, $location, userD
     $scope.changeSort = changeSort;
     $scope.whichIconToShow = whichIconToShow;
     $scope.deleteCategory = deleteCategory;
-    $scope.addNewCategory = addNewCategory;
+    $scope.addNewCategoryPrompt = addNewCategoryPrompt;
 
     $scope.$watch('sortByWhat', function (newValue, oldValue) {
         if (newValue !== oldValue) {
@@ -48,7 +48,7 @@ adsApp.controller('ViewCategoriesController', function ($scope, $location, userD
     function deleteCategory(username) {
         function delCategory() {
             adsDataService.deleteCategory(username, userDataService.getCurrentUser()).$promise.then(function () {
-                $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
+                $scope.categories = adsDataService.getAllCategoriesAsAdmin(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
                 notyTopCenter('success', 'Category successfully deleted ', 2);
             }, function () {
                 notyTopCenter('error', 'There was a problem deleting this category', 2);
@@ -58,7 +58,27 @@ adsApp.controller('ViewCategoriesController', function ($scope, $location, userD
         notyConfirm('Are you sure you want to delete this category?', delCategory);
     }
 
-    function addNewCategory() {
-        alert('asd');
+    function addNewCategoryPrompt() {
+        bootbox.prompt({
+            title: "What name do you want for your new category?",
+            callback: function(name) {
+                if (name !== null) {
+                    if (name == "") {
+                        notyTopCenter('error', 'Name cannot be null', 2);
+                    } else {
+                        addNewCategory(name);
+                    }
+                }
+            }
+        });
+    }
+
+    function addNewCategory(name) {
+        adsDataService.addCategory(name).$promise.then(function () {
+            $scope.categories = adsDataService.getAllCategoriesAsAdmin(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
+            notyTopCenter('success', 'Category successfully created ', 2);
+        }, function () {
+            notyTopCenter('error', 'There was a problem adding the category', 2);
+        })
     }
 });

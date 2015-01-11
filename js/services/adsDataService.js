@@ -1,4 +1,4 @@
-adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO: gather all resource methods in one place
+adsApp.factory('adsDataService', function adsDataService($resource,$q, userDataService) { //TODO: gather all resource methods in one place
     var pageSizeForAllAdsForUser = 4;
     var pageSizeForAllUserAds = 4;
     var pageSizeForAllAdsAsAdmin = 4;
@@ -222,6 +222,16 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         return resource.deleteCategory();
     }
 
+    function addCategory(name) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/categories/', {}, {
+            addNewCategory: {
+                method: 'POST',
+                headers: { 'Authorization': userDataService.getCurrentUser().access_token }
+            }
+        });
+        return resource.addNewCategory({'name': name});
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
@@ -240,6 +250,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         rejectAd: rejectAd,
         adminDeleteAd: adminDeleteAd,
         getAllCategoriesAsAdmin: getAllCategoriesAsAdmin,
-        deleteCategory: deleteCategory
+        deleteCategory: deleteCategory,
+        addCategory: addCategory
     }
 });
