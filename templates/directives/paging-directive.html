@@ -1,3 +1,7 @@
 <div class="paging-buttons">
-    <button ng-click="changeSelectedPageNumber($index+1)" ng-class="{'btn': true, 'btn-mini':true, 'btn-success':true, 'page-button':true, 'active': isPageNumberSelected($index+1)}" ng-repeat="repeater in getArrayFromNElements(numberOfPages) track by $index">{{$index+1}}</button>
+    <button ng-click="changeSelectedPageNumber(1)" class="btn btn-mini btn-success">First</button>
+    <button ng-click="changeSelectedPageNumber(selectedPage-1)" class="btn btn-mini btn-success">Previous</button>
+    <button ng-click="changeSelectedPageNumber(page)" ng-class="{'btn': true, 'btn-mini':true, 'btn-success':true, 'page-button':true, 'active': isPageNumberSelected(page)}" ng-repeat="page in getPages()">{{page}}</button>
+    <button ng-click="changeSelectedPageNumber(selectedPage+1)" class="btn btn-mini btn-success">Next</button>
+    <button ng-click="changeSelectedPageNumber(numberOfPages)" class="btn btn-mini btn-success">Last</button>
 </div>

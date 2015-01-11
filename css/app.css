@@ -122,9 +122,9 @@
     margin-right: 5px;
 }
 
-#users-table, #categories-table {
+#users-table, #categories-table, #towns-table {
     margin: 0;
 }
-#add-new-category-button {
+#add-new-category-button, #add-new-town-button {
     margin: 10px 0;
 }

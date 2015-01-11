@@ -7,11 +7,26 @@ adsApp.directive('pagingDirective', function() { //TODO: Show only a few pages, 
             selectedPage: '='
         },
         controller: function ($scope) {
-            $scope.getArrayFromNElements = function getArrayFromNElements(n) {
-                return new Array(n);
+            $scope.getPages = function getPages() {
+                var pages = [];
+                pages.push($scope.selectedPage);
+                //Ad pages before the selectedPageNumber if possible
+                for(var i = $scope.selectedPage-1; i >= $scope.selectedPage - 2; i--) {
+                    if (i > 0) {
+                        pages.unshift(i);
+                    }
+                }
+                for(var y = $scope.selectedPage+1; y <= $scope.selectedPage + 2; y++) {
+                    if (y < $scope.numberOfPages) {
+                        pages.push(y);
+                    }
+                }
+                return pages;
             };
             $scope.changeSelectedPageNumber = function changeSelectedPageNumber(newPageNumber) {
-                $scope.selectedPage = newPageNumber;
+                if (newPageNumber > 0 && newPageNumber <= $scope.numberOfPages) {
+                    $scope.selectedPage = newPageNumber;
+                }
             };
 
             $scope.isPageNumberSelected  = function isPageNumberSelected(pageNumber) {
