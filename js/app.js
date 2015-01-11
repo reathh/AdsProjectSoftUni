@@ -34,6 +34,9 @@ var adsApp = angular
             .when('/admin/view/users', {
                 templateUrl: 'templates/admin/view-users.html'
             })
+            .when('/admin/edit/user/:username', {
+                templateUrl: 'templates/admin/view-users.html'
+            })
 
             .otherwise({redirectTo: '/view/ads'});
     });

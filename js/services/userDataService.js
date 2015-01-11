@@ -126,6 +126,20 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         return resource.getAllUsers();
     }
 
+    function deleteUser(username, userData) {
+            var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/user/' + username, {}, {
+                deleteUser: {
+                    method:'DELETE',
+                    headers: { 'Authorization': userData.access_token }
+                }
+            });
+            return resource.deleteUser();
+    }
+
+    function getUserAsAdmin(username, userData) {
+
+    }
+
     return {
         isUserLoggedIn: isUserLoggedIn,
         isUserAdmin: isUserAdmin,
@@ -137,6 +151,8 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         getCurrentUserFromServer: getCurrentUserFromServer,
         editUser: editUser,
         changePassword: changePassword,
-        getAllUsers: getAllUsers
+        getAllUsers: getAllUsers,
+        deleteUser: deleteUser,
+        getUserAsAdmin: getUserAsAdmin
      }
 });

@@ -11,6 +11,7 @@ adsApp.controller('ViewUsersController', function ($scope, $location, userDataSe
     $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
     $scope.changeSort = changeSort;
     $scope.whichIconToShow = whichIconToShow;
+    $scope.deleteUser = deleteUser;
 
     $scope.$watch('sortByWhat', function (newValue, oldValue) {
         if (newValue !== oldValue) {
@@ -41,5 +42,18 @@ adsApp.controller('ViewUsersController', function ($scope, $location, userDataSe
         } else {
             return '';
         }
+    }
+
+    function deleteUser(username) {
+        function delUser() {
+            userDataService.deleteUser(username, userDataService.getCurrentUser()).$promise.then(function () {
+                $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
+                notyTopCenter('success', 'User successfully deleted ', 2);
+            }, function () {
+                notyTopCenter('error', 'There was a problem deleting this user', 2);
+            })
+        }
+
+        notyConfirm('Are you sure you want to delete this user?', delUser);
     }
 });
