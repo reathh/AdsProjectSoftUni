@@ -1,3 +1,30 @@
 <div ng-controller="ViewCategoriesController">
-
+    <div class="green-box text-center">
+        <div class="white-box">
+            <div class="table-responsive">
+                <table id="categories-table" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th ng-click="changeSort('Id')">Id <i ng-class="whichIconToShow('Id')"></i></th>
+                        <th ng-click="changeSort('Name')">Name <i ng-class="whichIconToShow('Name')"></i></th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="category in categories.categories">
+                        <td>{{category.id}}</td>
+                        <td>{{category.username}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-success">Edit</button>
+                                <button class="btn btn-success" ng-click="deleteUser(user.username)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div paging-directive number-of-pages="categories.numPages" selected-page="selectedPageNumber"></div>
+    </div>
 </div>

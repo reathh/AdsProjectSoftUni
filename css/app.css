@@ -122,6 +122,6 @@
     margin-right: 5px;
 }
 
-#users-table {
+#users-table, #categories-table {
     margin: 0;
 }

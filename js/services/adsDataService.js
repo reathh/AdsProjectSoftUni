@@ -1,7 +1,8 @@
 adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO: gather all resource methods in one place
     var pageSizeForAllAdsForUser = 4;
     var pageSizeForAllUserAds = 4;
-    var pageSizeForAllAllAdsAsAdmin = 4;
+    var pageSizeForAllAdsAsAdmin = 4;
+    var numberOfCategoriesForAllCategoriesAsAdmin = 5;
 
     function getAllAds(categoryId, townId, selectedPageNumber) {
         var pageSize = '?PageSize=' + pageSizeForAllAdsForUser;
@@ -14,7 +15,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
     }
 
     function getAllAdsAsAdmin(userData, statusId, categoryId, townId, selectedPageNumber) {
-        var pageSize = '?PageSize=' + pageSizeForAllAdsForUser;
+        var pageSize = '?PageSize=' + pageSizeForAllAdsAsAdmin;
         var statusIdAsString = statusId != null ? '&Status=' + statusId : '';
         var categoryIdAsString = categoryId ? "&CategoryId=" + categoryId : '';
         var townIdAsString = townId ? "&TownId=" + townId : '';
@@ -197,6 +198,20 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         return resource.deleteAd();
     }
 
+    function getAllCategoriesAsAdmin(userData, sortByWhat, pageNumber) {
+        var pageSize = '?PageSize=' + numberOfCategoriesForAllCategoriesAsAdmin;
+        var sort = sortByWhat != null ? '&SortBy=' + sortByWhat : '';
+        var page = pageNumber ? '&StartPage=' + pageNumber : '';
+        var url = 'http://softuni-ads.azurewebsites.net/api/admin/categories' + pageSize + sort + page;
+        var resource = $resource(url, {}, {
+            getAllCategoriesAsAdmin: {
+                method: 'GET',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.getAllCategoriesAsAdmin();
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
@@ -213,6 +228,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         getAllAdsAsAdmin: getAllAdsAsAdmin,
         approveAd: approveAd,
         rejectAd: rejectAd,
-        adminDeleteAd: adminDeleteAd
+        adminDeleteAd: adminDeleteAd,
+        getAllCategoriesAsAdmin: getAllCategoriesAsAdmin
     }
 });
