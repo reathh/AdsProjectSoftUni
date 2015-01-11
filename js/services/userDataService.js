@@ -136,8 +136,37 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
             return resource.deleteUser();
     }
 
-    function getUserAsAdmin(username, userData) {
+    function editUserAsAdmin(user, userData) {
+        var userObj = {
+            'name': user.name,
+            'email': user.email,
+            'phoneNumber': user.phoneNumber,
+            'townId': user.townId,
+            'isAdmin': user.isAdmin
+        };
+        console.log(userObj);
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/user/' + user.username, {}, {
+            editProfileAsAdmin: {
+                method: 'PUT',
+                headers: {'Authorization': userData.access_token}
+            }
+        });
+        return resource.editProfileAsAdmin(user);
+    }
 
+    function changePasswordAsAdmin(username, passwordData, userData) {
+        var obj = {
+            'username': username,
+            'newPassword': passwordData.newPassword,
+            'confirmPassword': passwordData.confirmPassword
+        };
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/SetPassword', {}, {
+            changePassword: {
+                method: 'PUT',
+                headers: {'Authorization': userData.access_token}
+            }
+        });
+        return resource.changePassword(obj);
     }
 
     return {
@@ -151,8 +180,9 @@ adsApp.factory('userDataService', function userDataService($resource, $q) {
         getCurrentUserFromServer: getCurrentUserFromServer,
         editUser: editUser,
         changePassword: changePassword,
+        editUserAsAdmin: editUserAsAdmin,
+        changePasswordAsAdmin: changePasswordAsAdmin,
         getAllUsers: getAllUsers,
-        deleteUser: deleteUser,
-        getUserAsAdmin: getUserAsAdmin
+        deleteUser: deleteUser
      }
 });

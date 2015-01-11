@@ -34,8 +34,8 @@ var adsApp = angular
             .when('/admin/view/users', {
                 templateUrl: 'templates/admin/view-users.html'
             })
-            .when('/admin/edit/user/:username', {
-                templateUrl: 'templates/admin/view-users.html'
+            .when('/admin/edit/user', {
+                templateUrl: 'templates/admin/edit-user.html'
             })
             .when('/admin/view/categories', {
                 templateUrl: 'templates/admin/view-categories.html'

@@ -12,8 +12,11 @@
                 <label for="town">Town:</label>
                 <select id="town" ng-model="user.townId">
                     <option value="{{nullData}}">(None)</option>
-                    <option ng-repeat="town in towns" value="{{town.id}}">{{town.name}}</option>
+                    <option ng-repeat="town in towns" value="{{town.id}}" ng-selected="user.townId == town.id">{{town.name}}</option>
                 </select>
+                <div>
+                    <label for="is-admin">Is Admin?: </label><input type="checkbox" ng-model="user.isAdmin" id="is-admin"/>
+                </div>
                 <div>
                     <button class="btn btn-default btn-success" ng-disabled="editProfileForm.$invalid" ng-click="editProfile(user)">Edit Profile</button>
                 </div>
@@ -28,7 +31,7 @@
                 <label for="new-password">New Password: </label><input type="password" class="form-control" ng-model="passwordData.newPassword" id="new-password" required="required"/>
                 <label for="confirm-password">Confirm Password: </label><input type="password" class="form-control" ng-model="passwordData.confirmPassword" id="confirm-password" required="required"/>
                 <div>
-                    <button class="btn btn-default btn-success" ng-disabled="changePasswordForm.$invalid" ng-click="changePassword(passwordData)">Change Password</button>
+                    <button class="btn btn-default btn-success" ng-disabled="changePasswordForm.$invalid" ng-click="changePassword(user.username, passwordData)">Change Password</button>
                 </div>
             </form>
         </div>

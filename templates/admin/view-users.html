@@ -25,7 +25,7 @@
                             <td>{{user.townName | valueOrNull}}</td>
                             <td>
                                 <div class="btn-group btn-group-sm">
-                                    <a href="#/admin/edit/user/{{user.username}}" class="btn btn-success">Edit</a>
+                                    <button class="btn btn-success" ng-click="editProfile(user)">Edit</button>
                                     <button class="btn btn-success" ng-click="deleteUser(user.username)">Delete</button>
                                 </div>
                             </td>
