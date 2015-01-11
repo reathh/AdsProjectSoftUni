@@ -212,6 +212,16 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         return resource.getAllCategoriesAsAdmin();
     }
 
+    function deleteCategory(categoryId, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/categories/' + categoryId, {}, {
+            deleteCategory: {
+                method:'DELETE',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.deleteCategory();
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
@@ -229,6 +239,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         approveAd: approveAd,
         rejectAd: rejectAd,
         adminDeleteAd: adminDeleteAd,
-        getAllCategoriesAsAdmin: getAllCategoriesAsAdmin
+        getAllCategoriesAsAdmin: getAllCategoriesAsAdmin,
+        deleteCategory: deleteCategory
     }
 });

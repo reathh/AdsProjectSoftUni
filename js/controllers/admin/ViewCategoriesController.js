@@ -11,7 +11,8 @@ adsApp.controller('ViewCategoriesController', function ($scope, $location, userD
     $scope.categories = adsDataService.getAllCategoriesAsAdmin(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
     $scope.changeSort = changeSort;
     $scope.whichIconToShow = whichIconToShow;
-    $scope.deleteUser = deleteUser;
+    $scope.deleteCategory = deleteCategory;
+    $scope.addNewCategory = addNewCategory;
 
     $scope.$watch('sortByWhat', function (newValue, oldValue) {
         if (newValue !== oldValue) {
@@ -44,16 +45,20 @@ adsApp.controller('ViewCategoriesController', function ($scope, $location, userD
         }
     }
 
-    function deleteUser(username) {
-        function delUser() {
-            userDataService.deleteUser(username, userDataService.getCurrentUser()).$promise.then(function () {
+    function deleteCategory(username) {
+        function delCategory() {
+            adsDataService.deleteCategory(username, userDataService.getCurrentUser()).$promise.then(function () {
                 $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
-                notyTopCenter('success', 'User successfully deleted ', 2);
+                notyTopCenter('success', 'Category successfully deleted ', 2);
             }, function () {
-                notyTopCenter('error', 'There was a problem deleting this user', 2);
+                notyTopCenter('error', 'There was a problem deleting this category', 2);
             })
         }
 
-        notyConfirm('Are you sure you want to delete this user?', delUser);
+        notyConfirm('Are you sure you want to delete this category?', delCategory);
+    }
+
+    function addNewCategory() {
+        alert('asd');
     }
 });

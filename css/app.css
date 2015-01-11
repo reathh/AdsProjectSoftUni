@@ -125,3 +125,6 @@
 #users-table, #categories-table {
     margin: 0;
 }
+#add-new-category-button {
+    margin: 10px 0;
+}

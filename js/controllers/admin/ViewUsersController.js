@@ -12,7 +12,6 @@ adsApp.controller('ViewUsersController', function ($scope, $location, userDataSe
     $scope.changeSort = changeSort;
     $scope.whichIconToShow = whichIconToShow;
     $scope.deleteUser = deleteUser;
-
     $scope.$watch('sortByWhat', function (newValue, oldValue) {
         if (newValue !== oldValue) {
             $scope.users = userDataService.getAllUsers(userDataService.getCurrentUser(), newValue, $scope.selectedPageNumber);
