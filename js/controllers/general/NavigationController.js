@@ -30,6 +30,12 @@ adsApp.controller('NavigationController', function NavigationController($scope, 
             case '/admin/view/users':
                 changeSelectedNavigationItem($scope.navItems[1]);
                 break;
+            case '/admin/view/categories':
+                changeSelectedNavigationItem($scope.navItems[2]);
+                break;
+            case '/admin/view/towns':
+                changeSelectedNavigationItem($scope.navItems[3]);
+                break;
         }
     });
 
