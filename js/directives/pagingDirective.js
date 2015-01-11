@@ -1,4 +1,4 @@
-adsApp.directive('pagingDirective', function() { //TODO: Show only a few pages, not all
+adsApp.directive('pagingDirective', function() {
     return {
         restrict: 'AE',
         templateUrl: 'templates/directives/paging-directive.html',

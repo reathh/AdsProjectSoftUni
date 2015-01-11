@@ -1,4 +1,4 @@
-adsApp.directive('adItemDirective', function() { //TODO: Add custom filters when we have null data
+adsApp.directive('adItemDirective', function() {
     return {
         restrict: 'AE',
         templateUrl: 'templates/directives/ad-item-directive.html',

@@ -1,5 +1,6 @@
 <div ng-controller="ViewUserAdsController">
     <div id="top-of-ads"></div>
+    <div ng-show="!ads.ads.length"><div class="green-box">There are no ads for showing</div></div>
     <div ng-repeat="ad in ads.ads">
         <div class="green-box">
             <div user-ad-item-directive></div>
