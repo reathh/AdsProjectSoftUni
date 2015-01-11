@@ -13,6 +13,7 @@ adsApp.controller('ViewCategoriesController', function ($scope, $location, userD
     $scope.whichIconToShow = whichIconToShow;
     $scope.deleteCategory = deleteCategory;
     $scope.addNewCategoryPrompt = addNewCategoryPrompt;
+    $scope.editCategoryPrompt = editCategoryPrompt;
 
     $scope.$watch('sortByWhat', function (newValue, oldValue) {
         if (newValue !== oldValue) {
@@ -79,6 +80,32 @@ adsApp.controller('ViewCategoriesController', function ($scope, $location, userD
             notyTopCenter('success', 'Category successfully created ', 2);
         }, function () {
             notyTopCenter('error', 'There was a problem adding the category', 2);
+        })
+    }
+
+    function editCategoryPrompt(categoryId, categoryName) {
+        console.log(categoryName);
+        bootbox.prompt({
+            title: "What new name do you want for this category?",
+            value: categoryName,
+            callback: function(name) {
+                if (name !== null) {
+                    if (name == "") {
+                        notyTopCenter('error', 'Name cannot be null', 2);
+                    } else {
+                        editCategory(categoryId, name);
+                    }
+                }
+            }
+        });
+    }
+
+    function editCategory(categoryId, categoryName) {
+        adsDataService.editCategory(categoryId, categoryName).$promise.then(function () {
+            $scope.categories = adsDataService.getAllCategoriesAsAdmin(userDataService.getCurrentUser(), $scope.sortByWhat, $scope.selectedPageNumber);
+            notyTopCenter('success', 'Category successfully edited ', 2);
+        }, function () {
+            notyTopCenter('error', 'There was a problem editing the category', 2);
         })
     }
 });

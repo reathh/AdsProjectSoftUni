@@ -16,7 +16,7 @@
                         <td>{{category.username}}</td>
                         <td>
                             <div class="btn-group">
-                                <button class="btn btn-success">Edit</button>
+                                <button class="btn btn-success" ng-click="editCategoryPrompt(category.id, category.username)">Edit</button>
                                 <button class="btn btn-success" ng-click="deleteCategory(category.id)">Delete</button>
                             </div>
                         </td>

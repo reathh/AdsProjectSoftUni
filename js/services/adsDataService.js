@@ -9,7 +9,6 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q, userDataS
         var categoryIdAsString = categoryId ? "&CategoryId=" + categoryId : '';
         var townIdAsString = townId ? "&TownId=" + townId : '';
         var startPage = selectedPageNumber ? '&StartPage=' + selectedPageNumber : '';
-        console.log(startPage);
         var resource = $resource('http://softuni-ads.azurewebsites.net/api/Ads' + pageSize + categoryIdAsString + townIdAsString + startPage);
         return resource.get();
     }
@@ -232,6 +231,16 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q, userDataS
         return resource.addNewCategory({'name': name});
     }
 
+    function editCategory(categoryId, categoryName) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/categories/' + categoryId, {}, {
+            editCategory: {
+                method: 'PUT',
+                headers: { 'Authorization': userDataService.getCurrentUser().access_token }
+            }
+        });
+        return resource.editCategory({'name': categoryName});
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
@@ -251,6 +260,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q, userDataS
         adminDeleteAd: adminDeleteAd,
         getAllCategoriesAsAdmin: getAllCategoriesAsAdmin,
         deleteCategory: deleteCategory,
-        addCategory: addCategory
+        addCategory: addCategory,
+        editCategory: editCategory
     }
 });
