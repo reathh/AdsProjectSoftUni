@@ -8,7 +8,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q) { //TODO:
         var categoryIdAsString = categoryId ? "&CategoryId=" + categoryId : '';
         var townIdAsString = townId ? "&TownId=" + townId : '';
         var startPage = selectedPageNumber ? '&StartPage=' + selectedPageNumber : '';
-
+        console.log(startPage);
         var resource = $resource('http://softuni-ads.azurewebsites.net/api/Ads' + pageSize + categoryIdAsString + townIdAsString + startPage);
         return resource.get();
     }

@@ -21,14 +21,7 @@ adsApp.controller('ViewUserAdsController', function ($scope, $location, $timeout
 
     $scope.$watch('selectedStatusOptionId', function (newValue, oldValue) {
         if (newValue !== oldValue) {
-                //adsDataService.getAllUserAds(newValue, $scope.selectedPageNumber, userDataService.getCurrentUser()).$promise.then(function (data) {
-                //    $scope.ads = data;
-                //    console.log($scope.ads);
-                //    $scope.dirty = true;
-                //});
-
             $scope.ads = adsDataService.getAllUserAds(newValue, $scope.selectedPageNumber, userDataService.getCurrentUser());
-
         }
     }, true);
 

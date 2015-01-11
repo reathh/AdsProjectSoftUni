@@ -8,7 +8,7 @@ adsApp.controller('viewAdsAsUserController', function viewAdsAsUserController($s
     $scope.selectedTownId = 0;
     $scope.selectedPageNumber = 1;
 
-    $scope.ads = adsDataService.getAllAds();
+    $scope.ads = adsDataService.getAllAds($scope.selectedCategoryId, $scope.selectedTownId, $scope.selectedPageNumber);
     $scope.categories = adsDataService.getAllCategories();
     $scope.towns = adsDataService.getAllTowns();
 
@@ -26,7 +26,8 @@ adsApp.controller('viewAdsAsUserController', function viewAdsAsUserController($s
 
     $scope.$watch('selectedPageNumber', function (newValue, oldValue) {
         if (newValue !== oldValue) {
-            $scope.ads = adsDataService.getAllAds($scope.selectedCategoryId, $scope.selectedTownId, newValue);
+            $scope.selectedPageNumber = newValue;
+            $scope.ads = adsDataService.getAllAds($scope.selectedCategoryId, $scope.selectedTownId, $scope.selectedPageNumber);
             $location.hash('top-of-ads');
             $anchorScroll();
         }

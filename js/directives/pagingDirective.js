@@ -12,6 +12,7 @@ adsApp.directive('pagingDirective', function() { //TODO: Show only a few pages, 
             };
             $scope.changeSelectedPageNumber = function changeSelectedPageNumber(newPageNumber) {
                 $scope.selectedPage = newPageNumber;
+                console.log($scope.selectedPage);
             };
 
             $scope.isPageNumberSelected  = function isPageNumberSelected(pageNumber) {
