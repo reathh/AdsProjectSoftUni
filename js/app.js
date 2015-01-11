@@ -40,6 +40,9 @@ var adsApp = angular
             .when('/admin/view/categories', {
                 templateUrl: 'templates/admin/view-categories.html'
             })
+            .when('/admin/view/towns', {
+                templateUrl: 'templates/admin/view-towns.html'
+            })
 
             .otherwise({redirectTo: '/view/ads'});
     });

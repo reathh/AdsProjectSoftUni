@@ -1,0 +1,31 @@
+<div ng-controller="ViewTownsController">
+    <div class="green-box text-center">
+        <div class="white-box">
+            <div class="table-responsive">
+                <table id="towns-table" class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th ng-click="changeSort('Id')">Id <i ng-class="whichIconToShow('Id')"></i></th>
+                        <th ng-click="changeSort('Name')">Name <i ng-class="whichIconToShow('Name')"></i></th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="town in towns.towns">
+                        <td>{{town.id}}</td>
+                        <td>{{town.username}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-success" ng-click="editTownPrompt(town.id, town.username)">Edit</button>
+                                <button class="btn btn-success" ng-click="deleteTown(town.id)">Delete</button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <button id="add-new-town-button" class="btn btn-success" ng-click="addNewTownPrompt()">Add New Town</button>
+        <div paging-directive number-of-pages="towns.numPages" selected-page="selectedPageNumber"></div>
+    </div>
+</div>

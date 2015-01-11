@@ -3,6 +3,7 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q, userDataS
     var pageSizeForAllUserAds = 4;
     var pageSizeForAllAdsAsAdmin = 4;
     var numberOfCategoriesForAllCategoriesAsAdmin = 5;
+    var numberOfTownsForAllTownsAsAdmin = 5;
 
     function getAllAds(categoryId, townId, selectedPageNumber) {
         var pageSize = '?PageSize=' + pageSizeForAllAdsForUser;
@@ -241,6 +242,50 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q, userDataS
         return resource.editCategory({'name': categoryName});
     }
 
+    function getAllTownsAsAdmin(userData, sortByWhat, pageNumber) {
+        var pageSize = '?PageSize=' + numberOfTownsForAllTownsAsAdmin;
+        var sort = sortByWhat != null ? '&SortBy=' + sortByWhat : '';
+        var page = pageNumber ? '&StartPage=' + pageNumber : '';
+        var url = 'http://softuni-ads.azurewebsites.net/api/admin/towns' + pageSize + sort + page;
+        var resource = $resource(url, {}, {
+            getAllTownsAsAdmin: {
+                method: 'GET',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.getAllTownsAsAdmin();
+    }
+
+    function deleteTown(townId, userData) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/towns/' + townId, {}, {
+            deleteTown: {
+                method:'DELETE',
+                headers: { 'Authorization': userData.access_token }
+            }
+        });
+        return resource.deleteTown();
+    }
+
+    function addTown(name) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/towns/', {}, {
+            addNewTown: {
+                method: 'POST',
+                headers: { 'Authorization': userDataService.getCurrentUser().access_token }
+            }
+        });
+        return resource.addNewTown({'name': name});
+    }
+
+    function editTown(townId, townName) {
+        var resource = $resource('http://softuni-ads.azurewebsites.net/api/admin/towns/' + townId, {}, {
+            editTown: {
+                method: 'PUT',
+                headers: { 'Authorization': userDataService.getCurrentUser().access_token }
+            }
+        });
+        return resource.editTown({'name': townName});
+    }
+
     return {
         getAllAds: getAllAds,
         getAllCategories: getAllCategories,
@@ -261,6 +306,10 @@ adsApp.factory('adsDataService', function adsDataService($resource,$q, userDataS
         getAllCategoriesAsAdmin: getAllCategoriesAsAdmin,
         deleteCategory: deleteCategory,
         addCategory: addCategory,
-        editCategory: editCategory
+        editCategory: editCategory,
+        getAllTownsAsAdmin: getAllTownsAsAdmin,
+        deleteTown: deleteTown,
+        addTown: addTown,
+        editTown: editTown
     }
 });

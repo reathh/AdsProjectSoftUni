@@ -84,7 +84,6 @@ adsApp.controller('ViewCategoriesController', function ($scope, $location, userD
     }
 
     function editCategoryPrompt(categoryId, categoryName) {
-        console.log(categoryName);
         bootbox.prompt({
             title: "What new name do you want for this category?",
             value: categoryName,
